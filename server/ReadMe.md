@@ -3,8 +3,8 @@
 ###后端开发任务
 - 后端协作约定及代码规范
 - 模型设计 Model **Resolved**
-- ~~路由设计controller~~ api接口设计 **Inprocess**
-- 后台脚手架Demo **Inprocess**
+- ~~路由设计controller~~ api接口设计 **In Progress**
+- 后台脚手架Demo **In Progress**
 - 功能模块 **Resolved**
  + 登录注册功能 
  + project部分
@@ -15,16 +15,16 @@
 ##后端协作约定及代码规范
 
 ###服务器环境
-1.nodejs版本 [https://nodejs.org/en/](https://nodejs.org/en/)  6.9.1 LTS;
-2.框架 express 4.14.0;
-3.数据库  mongodb 3.2.10; 
-4.数据操作mongoose;
-5.redis 3.2.100 [*windows下载*](https://github.com/MSOpenTech/redis/releases).
+1. nodejs版本 [https://nodejs.org/en/](https://nodejs.org/en/)  6.9.1 LTS;
+2. 框架 express 4.14.0;
+3. 数据库  mongodb 3.2.10; 
+4. 数据操作mongoose;
+5. redis 3.2.100 [*windows下载*](https://github.com/MSOpenTech/redis/releases).
 
 ###代码约定
-1.JS使用ES2015(ES6);
-2.代码工具ESLint;
-3.规范：airbnb.
+1. JS使用ES2015(ES6);
+2. 代码工具ESLint;
+3. 规范：airbnb.
 ##数据模型
 ###用户数据模型
 ```
