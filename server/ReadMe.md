@@ -78,7 +78,7 @@ developer_model {
 ```
 ###留言板数据模型 
 ```
-~~comment~~comment_model {
+comment_model {
   _id: Schema.Types.ObjectId,
   user: { _id: Schema.Types.ObjectId, avator: String, nickname: String },
   pid: String, // 项目id
