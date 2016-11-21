@@ -1,7 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
 export default mongoose.model('user', new Schema({
-  _id: Schema.Types.ObjectId,
   username: String, // 用户名
   nickname: String, // 昵称  第三方登录时，存储第三方用户的昵称
   passwd: String, // 密码
