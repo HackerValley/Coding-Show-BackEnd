@@ -1,7 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
 export default mongoose.model('project', new Schema({
-  _id: Schema.Types.ObjectId,
   uid: String, // 上传的用户 id
   project_name: String, // 项目名称
   description: String, // 一句话描述
