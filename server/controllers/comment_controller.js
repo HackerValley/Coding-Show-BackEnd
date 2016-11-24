@@ -1,16 +1,16 @@
 import CommentHandler from '../handlers/comment_handlers.js';
 const commentHandler = new CommentHandler();
-export default function (app) {
+export default {
     // 留言获取
-    app.get('/api/comment/:id', (req, res) => {
+    fetchOne : (req, res) => {
 
         commentHandler.fetchAllComment(1, 100).then(result=> {
             res.send(result);
         });
-    });
+    },
 
     // 留言
-    app.post('/api/comment', (req, res) => {
+    doComment : (req, res) => {
         console.log("comment");
         let commentJson = {
             user: {_id: '5832705b29911605406a201b', avator: 'lsjflsadjflkjak', nickname: 'tom'},
@@ -21,5 +21,5 @@ export default function (app) {
             .then(result=> {
                 res.send(result);
             });
-    });
+    }
 }

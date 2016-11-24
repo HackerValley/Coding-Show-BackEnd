@@ -1,0 +1,11 @@
+{
+  "description" : "这个文件存放项目的配置信息，使用的时候需要复制出来一份，然后改名为config.json",
+  "port" : "8800",
+  "mongoConfig" : {
+    "option" : {},
+    "url" : "mongodb://localhost/coding_show"
+  },
+  "redisConfig" : {
+
+  }
+}

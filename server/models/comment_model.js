@@ -4,7 +4,7 @@ const CommentSchema = new Schema({
     user: {_id: Schema.Types.ObjectId, avator: String, nickname: String},
     pid: String, // 项目id
     content: String, // 评论内容
-    comment_time: {type: Date, default: Date.now()} // 评论时间
+    comment_time: {type: Date, default: Date.now} // 评论时间
 });
 
 

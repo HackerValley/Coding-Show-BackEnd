@@ -1,9 +1,9 @@
 import userHandlers from '../handlers/user_handlers.js';
 const userHandle = new userHandlers();
 
-export default function (app) {
-    // 用户注册
-    app.post('/api/user/register', (req, res) => {
+
+export default {
+    doRegister : function(req, res) {
         let defaultJson = {
             username: 'user1',
             nickname: 'yunDuanXinYue',
@@ -31,21 +31,27 @@ export default function (app) {
                 res.send(result);
             });
 
-    });
-
-    // 获取用户信息
-    app.get('/api/user/:id', (req, res) => {
+    },
+    getInfo : function(req, res) {
         res.send('This is user info!');
-    });
-    // 根据用户名获取用户信息
-    app.get('/api/username/:username', (req, res) => {
-        userHandle.getOne({username: req.params.username})
-        .then((result)=>{
-            res.send( result );
-        });
-    });
-
-    // 登录
-
-
-}
+    }
+};
+//export default function (app) {
+//
+//
+//    // 获取用户信息
+//    app.get('/api/user/:id', (req, res) => {
+//
+//    });
+//    // 根据用户名获取用户信息
+//    app.get('/api/username/:username', (req, res) => {
+//        userHandle.getOne({username: req.params.username})
+//        .then((result)=>{
+//            res.send( result );
+//        });
+//    });
+//
+//    // 登录
+//
+//
+//}
