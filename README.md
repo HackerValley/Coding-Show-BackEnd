@@ -94,52 +94,50 @@ comment_model {
 
 ###后台脚手架Demo目录结构
 ```
-│  .babelrc  //babel配置文件
-│  .eslintrc //eslint配置文件
-│  index.js  //入口文件
-│  package.json  
-│  ReadMe.md  
-│  server.js  
-│  
-├─bin  
-│  └─www
-├─config  //配置目录
-│      config.example.json
-│      config.json
-│      mongo_config.js
-│      redis_config.js
-│      
-├─controllers  //业务逻辑处理
-│      comment_controllers.js
-│      developer_controllers.js
-│      project_controllers.js
-│      user_controllers.js
-│
-├─handlers //数据处理
-│      comment_handlers.js
-│      developer_handlers.js
-│      project_handlers.js
-│      user_handlers.js
-│            
-├─middle //中间件
-│      index.js      
-├─models  //数据模型
-│      comment_model.js
-│      developer_model.js
-│      project_model.js
-│      user_model.js
-││
-├─public //静态资源
-│    
-├─routes  //路由目录
-│      index.js
-│      
-├─test  //测试目录
-│  └─mocha
-└─views  //模板目录
-        error.ejs
-        index.ejs
-        project.ejs
+
+ReadMe.md  
+package.json
+config.json 配置文件
+.babelrc  //babel配置文件
+.eslintrc //eslint配置文件
+server
+    │  index.js  //入口文件
+    │  app.js  express构造文件
+    │  config.js 全局配置信息
+    ├─bin  
+    │  └─www 服务启动文件
+    │      
+    ├─controllers  //业务逻辑处理
+    │      comment_controller.js
+    │      developer_controller.js
+    │      project_controller.js
+    │      user_controller.js
+    │
+    ├─handlers //数据处理,**这里面应该是导出对象，而不是导出类**
+    │      comment_handlers.js
+    │      developer_handlers.js
+    │      project_handlers.js
+    │      user_handlers.js
+    │            
+    ├─middle //中间件
+    │      index.js      
+    ├─models  //数据模型，**业务处理在handlers文件夹下的文件中编写**
+    │      comment_model.js
+    │      developer_model.js
+    │      project_model.js
+    │      user_model.js
+    ││
+    ├─public //静态资源
+    │    
+    ├─routes  //路由目录
+    │      index.js
+    │      
+    ├─test  //测试目录
+    │  └─mocha
+    └─views  //模板目录
+            error.ejs
+            index.ejs
+            project.ejs
 ```
 
 ##分工
