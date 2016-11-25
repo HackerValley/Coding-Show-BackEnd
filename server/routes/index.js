@@ -5,37 +5,37 @@ import developerController from '../controllers/developer_controller';
 import express  from 'express';
 let router = express.Router();
 
-  // ²âÊÔ
+  // æµ‹è¯•
 router.get('/', function (req, res) {
     res.render('index',{title:'backend'});
 });
-// ÓÃ»§×¢²á
+// ç”¨æˆ·æ³¨å†Œ
 router.post('/api/user/register', userController.doRegister);
-// ÓÃ»§µÇ³ö
+// ç”¨æˆ·ç™»å‡º
 router.get('/api/user/logout', userController.logout);
-//ÓÃ»§µÄµÇÂ¼
+//ç”¨æˆ·çš„ç™»å½•
 router.post('/api/user/login', userController.login);
 
   //userControllers(app);
-// Ìí¼ÓÏîÄ¿Ä£°å
+// æ·»åŠ é¡¹ç›®æ¨¡æ¿
 router.get('/api/projects/new', /* checkLogin, */ projectController.doAdd);
-// »ñÈ¡ÏîÄ¿ÁĞ±í
+// è·å–é¡¹ç›®åˆ—è¡¨
 router.get('/api/projects/list', projectController.doAdd);
-// »ñÈ¡ÎÒ·¢²¼µÄÏîÄ¿
+// è·å–æˆ‘å‘å¸ƒçš„é¡¹ç›®
 router.get('/api/projects/release', /* checkLogin, */ projectController.doAdd);
-// »ñÈ¡ÎÒ¿ª·¢µÄÏîÄ¿
+// è·å–æˆ‘å¼€å‘çš„é¡¹ç›®
 router.get('/api/projects/development', /* checkLogin, */ projectController.doAdd);
-// »ñÈ¡ÏîÄ¿ÏêÇéÒ³
+// è·å–é¡¹ç›®è¯¦æƒ…é¡µ
 router.get('/api/projects/:id', projectController.doAdd);
-// ´´½¨ÏîÄ¿
+// åˆ›å»ºé¡¹ç›®
 router.post('/api/projects', /* checkLogin, */ projectController.doAdd);
-// ĞŞ¸ÄÏîÄ¿
+// ä¿®æ”¹é¡¹ç›®
 router.put('/api/projects/:id', /* checkLogin, */ projectController.doAdd);
 
-// ÁôÑÔ»ñÈ¡
+// ç•™è¨€è·å–
 router.get('/api/comment/:id', commentController.fetchOne);
 
-// ÁôÑÔ
+// ç•™è¨€
 router.post('/api/comment', commentController.doComment);
 //developerController(app);
 
