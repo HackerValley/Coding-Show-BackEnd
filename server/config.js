@@ -15,5 +15,7 @@ export const port = settings.loadNecessaryInt('port');
 let mongoConfig = settings.loadNecessaryObject('mongoConfig');
 mongoose.connect(mongoConfig.url); // connect to database
 
+let redisConfig = settings.loadNecessaryObject('redisConfig');
 
+export const redisClient = redis.createClient(redisConfig);
 

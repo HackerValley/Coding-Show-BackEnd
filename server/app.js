@@ -4,10 +4,14 @@ import Express from 'Express';
 import bodyParser from 'body-Parser';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-
-// 引入
+import session from 'express-session';
+import connectRedis from 'connect-redis';
+let RedisStore = connectRedis(session);
+// 引入路由
 import routes from './routes';
 /* config */
+import {redisClient} from './config';
+
 const app = new Express();
 
 
@@ -24,12 +28,24 @@ app.use(bodyParser.json());
 // use morgan to log requests to the console
 app.use(logger('dev'));
 
-
+app.use(session({
+  secret: '%S43Xdj$',
+  cookie:{},
+  key:'coding_show',
+  resave:false,
+  saveUninitialized:false,
+  store: new RedisStore({
+    client:redisClient,
+    ttl:3600*72,
+    db:2,
+    prefix:'session:coding:'
+  })
+}));
 // 路由
 app.use('/', routes);
 //404
 app.use(function (req, res, next) {
-  res.status(404);
+  res.sendStatus(404);
   res.send('404 Not Found');
 });
 

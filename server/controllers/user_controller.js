@@ -36,7 +36,7 @@ export default {
             let result = {
                 status: 0,
                 msg: msg
-            }
+            };
             res.send( result );
         }
         let userInfoJson = {
