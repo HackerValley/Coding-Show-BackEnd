@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
 // 用户注册
 router.post('/api/user/register', userController.doRegister);
 // 用户登出
-router.post('/api/user/logout', userController.logout);
+router.get('/api/user/logout', userController.logout);
 //用户的登录
 router.post('/api/user/login', userController.login);
 
