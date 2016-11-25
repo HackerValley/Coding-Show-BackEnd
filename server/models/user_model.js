@@ -12,8 +12,8 @@ const UserSchema =  new Schema({
     expire_time: String, // token的失效时间
     sns_type: Number, // 第三方用户类型 微信 qq。。。
     avatar: String, // 头像
-    create_time: Date, // 创建时间
-    last_login_time: Date // 最后登录时间
+    create_time: String, // 创建时间
+    last_login_time: String // 最后登录时间
 });
 
 UserSchema.statics = {

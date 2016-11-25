@@ -17,8 +17,28 @@ export default {
             sns_type: 0,
             avatar: 'http://fd.img.com/img1.png',
             create_time: '2016-11-22 12:23:00',
-            last_login_time: '2016-11-22 15:23:00'
+            last_login_time: new Date
         };
+        let msg = [],errFlag = false;
+        if(!req.body.username){
+            msg.push('请填写正确的用户名');
+            errFlag = true;
+        }
+        if(!req.body.email){
+            msg.push('请填写正确的邮箱');
+            errFlag = true;
+        }
+        if(!req.body.password){
+            msg.push('请填写密码');
+            errFlag = true;
+        }
+        if(errFlag){
+            let result = {
+                status: 0,
+                msg: msg
+            }
+            res.send( result );
+        }
         let userInfoJson = {
             username: req.body.username,
             email: req.body.email,
@@ -34,24 +54,23 @@ export default {
     },
     getInfo : function(req, res) {
         res.send('This is user info!');
+    },
+    getInfoByUsername : function(req, res){
+        userHandle.getOne({username: req.params.username}).then((result)=>{
+            res.send( result );
+        });
+    },
+    login : function(req, res){
+        let username = req.body.username;
+        userHandle.getOne({username: username}).then((result)=>{
+            //console.log(result);res.send(result);return;
+            req.session.user = result.data;
+            res.redirect('/');
+        });
+    },
+    logout : function(req, res){
+        req.session.user = null;
+        res.redirect('/');
     }
+
 };
-//export default function (app) {
-//
-//
-//    // 获取用户信息
-//    app.get('/api/user/:id', (req, res) => {
-//
-//    });
-//    // 根据用户名获取用户信息
-//    app.get('/api/username/:username', (req, res) => {
-//        userHandle.getOne({username: req.params.username})
-//        .then((result)=>{
-//            res.send( result );
-//        });
-//    });
-//
-//    // 登录
-//
-//
-//}

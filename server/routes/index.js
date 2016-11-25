@@ -11,6 +11,11 @@ router.get('/', function (req, res) {
 });
 // 用户注册
 router.post('/api/user/register', userController.doRegister);
+// 用户登出
+router.post('/api/user/logout', userController.logout);
+//用户的登录
+router.post('/api/user/login', userController.login);
+
   //userControllers(app);
 // 添加项目模板
 router.get('/api/projects/new', /* checkLogin, */ projectController.doAdd);
