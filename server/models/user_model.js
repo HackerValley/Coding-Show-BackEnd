@@ -13,8 +13,8 @@ const UserSchema =  new Schema({
     expire_time: String, // token的失效时间
     sns_type: {type:Number,default:0}, // 第三方用户类型 微信 qq。。。
     avatar: {type:String,default:''}, // 头像
-    create_time: {type:String, default : formatDate}, // 创建时间
-    last_login_time: {type:String, default : formatDate} // 最后登录时间
+    create_time: {type:Date, default : new Date().now}, // 创建时间
+    last_login_time: {type:Date, default : new Date().now} // 最后登录时间
 });
 UserSchema.index({username:1},{unique:true});
 
