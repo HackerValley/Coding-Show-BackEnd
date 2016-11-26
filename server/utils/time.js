@@ -2,7 +2,8 @@
 // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
 // 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
 
-exports.formatDate = function(date, fmt){ //author: meizz
+var formatDate = function(date, fmt){ //author: meizz
+    date = date || new Date();
     fmt = fmt || 'yyyy-MM-dd hh:mm:ss';
     var o = {
         "M+" : date.getMonth()+1,                 //月份
@@ -22,19 +23,9 @@ exports.formatDate = function(date, fmt){ //author: meizz
 };
 if (!Date.prototype.format) {
     Date.prototype.format = function(fmt) {
-        return exports.formatDate(this,fmt);
-    }
+        return formatDate(this,fmt);
+    };
 }
-/**
- *
- * @param origin 格式：20161201115908
- * @returns {string}
- */
-exports.getFormatTimeFromDigitString = function(origin){
-    if (!origin || origin.length !== 14) {
-        return '';
-    }
-    var date = new Date(origin.substr(0,4),origin.substr(4,2) - 1,origin.substr(6,2),
-        origin.substr(8,2),origin.substr(10,2),origin.substr(12,2));
-    return date.format();
-}
+
+
+export  {formatDate};
