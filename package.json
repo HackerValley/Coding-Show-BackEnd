@@ -4,7 +4,7 @@
   "description": "coding-show backend server",
   "main": "server/index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register server/test/mocha"
+    "test": "mocha --compilers js:babel-register --recursive server/test/mocha"
   },
   "repository": {
     "type": "git",
