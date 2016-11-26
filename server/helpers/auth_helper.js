@@ -7,8 +7,8 @@ export default {
     passwdSign : function(username,passwd) {
         return crypto.createHmac('sha256',SECRET).update(username+passwd).digest('base64');
     },
-    passwdVerify : function(username,passwdInput,passwdDb) {console.log(arguments);
-        var expectPass = this.passwdSign(username+passwdInput);console.log('expect',expectPass);
+    passwdVerify : function(username,passwdInput,passwdDb) {
+        var expectPass = this.passwdSign(username,passwdInput);
         return passwdDb === expectPass;
     }
 };
