@@ -2,8 +2,10 @@ import userController from '../controllers/user_controller';
 import projectController from '../controllers/project_controller';
 import commentController from '../controllers/comment_controller';
 import developerController from '../controllers/developer_controller';
+import authMiddle from '../middleware/auth_middle';
 import express  from 'express';
 let router = express.Router();
+const LOGIN_CHECK_MIDDLE = [authMiddle.needLogin];
 
   // 测试
 router.get('/', function (req, res) {
@@ -38,5 +40,8 @@ router.get('/api/comment/:id', commentController.fetchOne);
 // 留言
 router.post('/api/comment', commentController.doComment);
 //developerController(app);
+
+//登录测试
+router.get('/api/test/login',LOGIN_CHECK_MIDDLE,function(req,res) {res.send({status:0});});
 
 export default router;
