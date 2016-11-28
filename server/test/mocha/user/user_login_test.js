@@ -3,7 +3,7 @@
  */
 import request from 'supertest';
 import app from '../../../app';
-let expect =require('chai').expect;
+import {expect} from 'chai';
 let cookie = '';
 /*
 测试之前保证这个用户在数据库中
