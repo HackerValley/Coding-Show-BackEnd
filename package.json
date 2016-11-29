@@ -4,7 +4,10 @@
   "description": "coding-show backend server",
   "main": "server/index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register --recursive server/test/mocha"
+    "test": "mocha --compilers js:babel-register --recursive server/test/mocha",
+    "start": "nodemon server/bin/www --exec babel-node",
+    "build": "babel server -d dist",
+    "serve": "node dist/bin/www"
   },
   "repository": {
     "type": "git",
@@ -30,6 +33,7 @@
     "redis": "^2.6.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "chai": "^3.5.0",
     "eslint": "^3.10.2",
     "eslint-config-airbnb": "^13.0.0",

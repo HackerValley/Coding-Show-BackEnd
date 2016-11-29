@@ -1,6 +1,6 @@
-#server端说明
+# server端说明
 
-###后端开发任务
+### 后端开发任务
 - 后端协作约定及代码规范
 - 模型设计 Model **Resolved**
 - ~~路由设计controller~~ api接口设计 **In Progress**
@@ -12,21 +12,21 @@
  +后台页面（开发此页面请先联系@易燃询问用途）？
 - 基础代码编写 **todo**
 
-##后端协作约定及代码规范
+## 后端协作约定及代码规范
 
-###服务器环境
+### 服务器环境
 1. nodejs版本 [https://nodejs.org/en/](https://nodejs.org/en/)  6.9.1 LTS;
 2. 框架 express 4.14.0;
 3. 数据库  mongodb 3.2.10; 
 4. 数据操作mongoose;
 5. redis 3.2.100 [*windows下载*](https://github.com/MSOpenTech/redis/releases).
 
-###代码约定
+### 代码约定
 1. JS使用ES2015(ES6);
 2. 代码工具ESLint;
 3. 规范：airbnb.
-##数据模型
-###用户数据模型
+## 数据模型
+### 用户数据模型
 ```
 user_model {
   _id: Schema.Types.ObjectId, //id
@@ -46,7 +46,7 @@ user_model {
 }
 ```
 
-###项目数据模型
+### 项目数据模型
 
 ```
 project_model {
@@ -66,7 +66,7 @@ project_model {
   mod_time: Date //最后修改时间
 }
 ```
-###开发者数据模型
+### 开发者数据模型
 ```
 developer_model {
   _id: Schema.Types.ObjectId, //id
@@ -76,7 +76,7 @@ developer_model {
   application_time: Date //申请时间
 }
 ```
-###留言板数据模型 
+### 留言板数据模型 
 ```
 comment_model {
   _id: Schema.Types.ObjectId,
@@ -90,14 +90,14 @@ comment_model {
 [*rap*](http://http://rap.taobao.org/org/group.do?plid=6302)
 目前版本0.0.0.26
 
-##目录结构
+## 目录结构
 
-###后台脚手架Demo目录结构
+### 后台脚手架Demo目录结构
 ```
 
 ReadMe.md  
 package.json
-config.json 配置文件
+config.example.json 配置文件,项目使用前复制一份，然后重命名为config.json
 .babelrc  //babel配置文件
 .eslintrc //eslint配置文件
 server
@@ -140,7 +140,7 @@ server
             project.ejs
 ```
 
-##分工
+## 分工
  + 登录注册功能  高阳 苏汉宇
  + project部分 临渊
  + 留言板功能 黄圣森
