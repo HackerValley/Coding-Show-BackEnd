@@ -20,7 +20,7 @@ const app = new Express();
 //app.set('env', 'production');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use('/static', Express.static(`${__dirname}/public`));
+app.use('/', Express.static(`${__dirname}/public`));
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -45,8 +45,7 @@ app.use(session({
 app.use('/', routes);
 //404
 app.use(function (req, res, next) {
-  res.sendStatus(404);
-  res.send('404 Not Found');
+  res.status(404).send('404 Not Found');
 });
 
 export default app;
