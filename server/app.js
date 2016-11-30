@@ -1,7 +1,7 @@
 import path from 'path';
 // 中间件
-import Express from 'Express';
-import bodyParser from 'body-Parser';
+import Express from 'express';
+import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import session from 'express-session';
