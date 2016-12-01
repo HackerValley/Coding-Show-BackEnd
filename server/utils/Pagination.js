@@ -13,7 +13,7 @@ function Pagination(options) {
     this.page_size = options.pageSize || Pagination.NUM_DEFAULT_PAGE_SIZE;
     this.record_total = options.recordTotal || 0;
     this.page_total = Math.ceil(this.record_total/this.page_size);
-    this.list = data || [];
+    this.list = options.list || [];
     this.option = {};
 }
 
