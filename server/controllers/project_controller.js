@@ -5,6 +5,9 @@ import projectHandlers from '../handlers/project_handlers.js';
 export default  {
     doAdd : function(req, res) {
         res.send('not supported');
+    },
+    addNew : (req, res) => {
+        res.send('n supported');
     }
 
 }
