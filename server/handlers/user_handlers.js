@@ -18,22 +18,15 @@ export default   {
         });
     },
     // 查询某个用户信息
-    getOne : function(someInfo){
-        return userModel.getOne( someInfo )
-                .then((userInfo)=>{
-                    return {
-                        status: 1,
-                        msg: 'success',
-                        data: userInfo
-                    }
-                })
-                .catch((err)=>{
-                    return {
-                        status: 0,
-                        msg: 'error',
-                        data: err
-                    }
-                });
+    getOne : function(someInfo,callback){
+        userModel.findOne( someInfo,(err,item) => {
+            if( err ){
+                console.error('查找用户时失败',err);
+                return callback('查找用户时失败');
+            }
+            callback(false,item);
+        });
+
     },
     // 添加用户
     addUser: function(userInfo,callback) {

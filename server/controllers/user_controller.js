@@ -43,8 +43,12 @@ export default {
         res.send('This is user info!');
     },
     getInfoByUsername : function(req, res){
-        userHandler.getOne({username: req.params.username}).then((result)=>{
-            res.send( result );
+        //TODO check param
+        userHandler.getOne({username: req.params.username},(err,user) => {
+            if (err) {
+                return res.send({status:1,msg:err});
+            }
+            res.send({status:0,data:user});
         });
     },
     login : function(req, res){

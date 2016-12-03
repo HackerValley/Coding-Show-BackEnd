@@ -13,39 +13,13 @@ const UserSchema =  new Schema({
     expire_time: String, // token的失效时间
     sns_type: {type:Number,default:0}, // 第三方用户类型 微信 qq。。。
     avatar: {type:String,default:''}, // 头像
-    create_time: {type:Date, default : new Date().now}, // 创建时间
-    last_login_time: {type:Date, default : new Date().now} // 最后登录时间
+    create_time: {type:Date, default : Date.now}, // 创建时间
+    last_login_time: {type:Date, default : Date.now} // 最后登录时间
 });
 UserSchema.index({username:1},{unique:true});
 
 UserSchema.statics = {
-    // 根据用户名查找用户信息
-    getOne( username ){
-        return new Promise((resolve, reject)=> {
-            this.find(username, (err, userInfo)=>{
-                if( err ){
-                    reject( err );
-                } else {
-                    resolve( userInfo );
-                }
-            });
-        });
-    },
-
-    // 新增用户
-    add(userModel){
-        return new Promise((resolve,reject)=>{
-            userModel.save((err, info)=>{
-                if( err ){
-                    reject(err);
-                } else {
-                    resolve(info);
-                }
-            });
-        });
-    }
-
-
-}
+    //除非特殊情况，不要在这里写业务逻辑
+};
 
 export default mongoose.model('coding_show_user', UserSchema);
