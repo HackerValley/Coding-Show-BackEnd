@@ -24,25 +24,25 @@ router.get('/api/user/oauth2/callback/:snsType');
 
   //userControllers(app);
 // 添加项目模板
-router.get('/api/projects/new', /* checkLogin, */ projectController.doAdd);
+router.get('/api/projects/new',  LOGIN_CHECK_MIDDLE,  projectController.doAdd);
 // 获取项目列表
 router.get('/api/projects/list', projectController.doAdd);
 // 获取我发布的项目
-router.get('/api/projects/release', /* checkLogin, */ projectController.doAdd);
+router.get('/api/projects/release', LOGIN_CHECK_MIDDLE,  projectController.doAdd);
 // 获取我开发的项目
-router.get('/api/projects/development', /* checkLogin, */ projectController.doAdd);
+router.get('/api/projects/development', LOGIN_CHECK_MIDDLE,  projectController.doAdd);
 // 获取项目详情页
 router.get('/api/projects/:id', projectController.doAdd);
 // 创建项目
-router.post('/api/projects', /* checkLogin, */ projectController.doAdd);
+router.post('/api/projects', LOGIN_CHECK_MIDDLE, projectController.doAdd);
 // 修改项目
-router.put('/api/projects/:id', /* checkLogin, */ projectController.doAdd);
+router.put('/api/projects/:id', LOGIN_CHECK_MIDDLE, projectController.doAdd);
 
 // 留言获取
 router.get('/api/comment/:id', commentController.fetchOne);
 
 // 留言
-router.post('/api/comment', commentController.doComment);
+router.post('/api/comment', LOGIN_CHECK_MIDDLE, commentController.doComment);
 //developerController(app);
 
 //登录测试
