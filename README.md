@@ -27,7 +27,9 @@
 
 ## 4. api接口文档
 
-普通接口文档参见[*rap*](http://rap.taobao.org/workspace/myWorkspace.do?projectId=10767#81538)
+普通接口文档参见[*rap*](http://rap.taobao.org/workspace/myWorkspace.do?projectId=10767#81538)  
+关于前端登录状态判断的文档参见[这里](https://github.com/HackerValley/Coding-Show-BackEnd/wiki/login_status)  
+第三方登录流程参见[这里](https://github.com/HackerValley/Coding-Show-BackEnd/wiki/third_login)
 
 
 ## 5. 目录结构
