@@ -3,10 +3,10 @@ import projectHandlers from '../handlers/project_handlers.js';
 //import { checkLogin } from '../middleware';
 
 export default  {
-    doAdd : function(req, res) {
+    doAdd(req, res) {
         res.send('not supported');
     },
-    addNew : (req, res) => {
+    addNew(req, res) {
         res.send('n supported');
     }
 

@@ -1,7 +1,7 @@
 import userHandler from '../handlers/user_handlers';
 
 export default {
-    doRegister : function(req, res) {
+    doRegister(req, res) {
         let msg = undefined;
         if(!req.body.username){
             msg = '请填写正确的用户名';
@@ -39,10 +39,10 @@ export default {
         });
 
     },
-    getInfo : function(req, res) {
+    getInfo(req, res) {
         res.send('This is user info!');
     },
-    getInfoByUsername : function(req, res){
+    getInfoByUsername(req, res) {
         //TODO check param
         userHandler.getOne({username: req.params.username},(err,user) => {
             if (err) {
@@ -51,7 +51,7 @@ export default {
             res.send({status:0,data:user});
         });
     },
-    login : function(req, res){
+    login(req, res) {
         let _body = req.body;
         //TODO 检查为空
         let username = _body.username;
@@ -64,7 +64,7 @@ export default {
             res.send({status:0});
         });
     },
-    logout : function(req, res){
+    logout(req, res) {
         req.session.user = null;
         res.send({status:0});
     }

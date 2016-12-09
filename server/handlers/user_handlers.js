@@ -1,7 +1,7 @@
 import userModel from '../models/user_model';
 import authHelper from '../helpers/auth_helper';
 export default   {
-    loginCheck : function(username,passwd,callback) {
+    loginCheck(username,passwd,callback) {
         userModel.findOne({username:username},function(err,item) {
             if (err) {
                 console.error('获取用户信息时失败',err);
@@ -18,7 +18,7 @@ export default   {
         });
     },
     // 查询某个用户信息
-    getOne : function(someInfo,callback){
+    getOne(someInfo,callback) {
         userModel.findOne( someInfo,(err,item) => {
             if( err ){
                 console.error('查找用户时失败',err);
@@ -29,7 +29,7 @@ export default   {
 
     },
     // 添加用户
-    addUser: function(userInfo,callback) {
+    addUser(userInfo,callback) {
 //TODO 检查唯一性
         userInfo.passwd = authHelper.passwdSign(userInfo.username,userInfo.passwd);
         new userModel(userInfo).save((err, userInfo)=>{
