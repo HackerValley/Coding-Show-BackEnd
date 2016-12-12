@@ -24,19 +24,22 @@ router.get('/api/user/oauth2/callback/:snsType');
 
   //userControllers(app);
 // 添加项目模板
-router.get('/api/projects/new',  LOGIN_CHECK_MIDDLE,  projectController.doAdd);
+router.get('/api/projects/new', /*LOGIN_CHECK_MIDDLE,*/ projectController.getNew);
 // 获取项目列表
-router.get('/api/projects/list', projectController.doAdd);
+router.get('/api/projects/list', projectController.getList);
 // 获取我发布的项目
-router.get('/api/projects/release', LOGIN_CHECK_MIDDLE,  projectController.doAdd);
+router.get('/api/projects/release', /*LOGIN_CHECK_MIDDLE,*/ projectController.getRelease);
 // 获取我开发的项目
-router.get('/api/projects/development', LOGIN_CHECK_MIDDLE,  projectController.doAdd);
+router.get('/api/projects/development', /*LOGIN_CHECK_MIDDLE,*/ projectController.getDev);
 // 获取项目详情页
-router.get('/api/projects/:id', projectController.doAdd);
+router.get('/api/projects/:id', projectController.getDetail);
 // 创建项目
-router.post('/api/projects', LOGIN_CHECK_MIDDLE, projectController.doAdd);
+router.post('/api/projects', /*LOGIN_CHECK_MIDDLE,*/ projectController.createProject);
 // 修改项目
-router.put('/api/projects/:id', LOGIN_CHECK_MIDDLE, projectController.doAdd);
+router.put('/api/projects/:id', /*LOGIN_CHECK_MIDDLE,*/ projectController.modifyProject);
+
+// 参与开发 
+router.post('/api/developers', /*LOGIN_CHECK_MIDDLE,*/developerController.joinProject);
 
 // 留言获取
 router.get('/api/comment/:id', commentController.fetchOne);
