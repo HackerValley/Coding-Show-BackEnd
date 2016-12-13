@@ -50,6 +50,6 @@ router.post('/api/comment', LOGIN_CHECK_MIDDLE, commentController.doComment);
 
 //登录测试
 router.get('/api/test/login',LOGIN_CHECK_MIDDLE,function(req,res) {res.send({status:0});});
-router.get('/api/test/project',projectController.addNew);
+// router.get('/api/test/project',projectController.addNew);
 
 export default router;
