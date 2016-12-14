@@ -3,7 +3,7 @@
  */
 const ERROR_NO_LOGIN = 0xffff;
 export default {
-    needLogin : function(req, res, next) {
+    needLogin(req, res, next) {
         if (req.session && req.session.user) {
             return next();
         }
