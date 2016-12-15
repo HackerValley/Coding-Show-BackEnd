@@ -38,7 +38,7 @@ router.post('/api/projects', /*LOGIN_CHECK_MIDDLE,*/ projectController.createPro
 // 修改项目
 router.put('/api/projects/:id', /*LOGIN_CHECK_MIDDLE,*/ projectController.modifyProject);
 
-// 参与开发 
+// 参与开发
 router.post('/api/developers', /*LOGIN_CHECK_MIDDLE,*/developerController.joinProject);
 
 // 留言获取
