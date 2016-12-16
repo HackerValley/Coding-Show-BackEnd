@@ -5,13 +5,15 @@ import slogger from 'node-slogger';
 
 export default  {
     // 添加项目模板
-  getNew: (req, res) => {
+  getNew(req, res) {
     res.json({ status: 0, msg: '添加项目模板' }); // 测试
   },
   // 获取项目列表
-  getList: (req, res) => {
+  getList(req, res) {
     let record_total = 0;
+    let sort_key = { create_time: -1 };// 测试
     const query = {};
+
     projectHandlers.getCount(query)
       .then((result) => {
         if (result) {
@@ -28,7 +30,6 @@ export default  {
     const page_num = req.body.page_num || 1;
     const page_size = req.body.page_size || 12;
     const page_total = Math.floor(record_total / page_size) + 1;
-
     const op = {
       create_time: 1,
       pid: 1,
@@ -36,21 +37,12 @@ export default  {
       star_count: 1,
       uid: 1
     };
-
-    let sort_key = {};
-    if (req.body.sort_key === 'creat_time') {
-      sort_key = { create_time: -1};
-    } else if (req.body.sort_key === 'star_count') {
-      sort_key = { star_count: -1};
-    } else {
-      return res.json({ status: 1, msg: 'sort_key参数错误' });
-    }
-
     const pages = {
       skip: (page_num - 1) * page_size,
       limit: page_size,
       sort: sort_key
-    }
+    };
+
     projectHandlers.getList(query, op, pages)
       .then((result) => {
         res.json({
@@ -68,11 +60,12 @@ export default  {
   },
 
   // 获取我发布的项目
-  getRelease: (req, res) => {
+  getRelease(req, res) {
     const uid = req.session.uid;
+    let sort_key = { create_time: -1 };// 测试
     const query = { uid };
-
     let record_total = 0;
+
     projectHandlers.getCount(query)
       .then((result) => {
         if (result) {
@@ -98,21 +91,11 @@ export default  {
     const page_num = req.body.page_num || 1;
     const page_size = req.body.page_size || 12;
     const page_total = Math.floor(record_total / page_size) + 1;
-
-    let sort_key = {};
-    if (req.body.sort_key === 'creat_time') {
-      sort_key = { create_time: -1};
-    } else if (req.body.sort_key === 'star_count') {
-      sort_key = { star_count: -1};
-    } else {
-      return res.json({ status: 1, msg: 'sort_key参数错误' });
-    }
-
     const pages = {
       skip: (page_num - 1) * page_size,
       limit: page_size,
       sort: sort_key
-    }
+    };
 
     projectHandlers.getList(query, op, pages)
       .then((result) => {
@@ -130,9 +113,10 @@ export default  {
       });
   },
   // 获取我开发的项目
-  getDev: (req, res) => {
+  getDev(req, res) {
     const uid = req.session.uid;
     let record_total = 0;
+    let sort_key = { create_time: -1 };// 测试
     projectHandlers.getCountD(uid)
       .then((result) => {
         if (result) {
@@ -156,20 +140,12 @@ export default  {
     const page_num = req.body.page_num || 1;
     const page_size = req.body.page_size || 12;
     const page_total = Math.floor(record_total / page_size) + 1;
-    
-    let sort_key = {};
-    if (req.body.sort_key === 'creat_time') {
-      sort_key = { create_time: -1};
-    } else if (req.body.sort_key === 'star_count') {
-      sort_key = { star_count: -1};
-    } else {
-      return res.json({ status: 1, msg: 'sort_key参数错误' });
-    }
     const pages = {
       skip: (page_num - 1) * page_size,
       limit: page_size,
       sort: sort_key
-    }
+    };
+
     projectHandlers.getListD(uid, op, pages)
       .then((result) => {
         res.json({
@@ -186,8 +162,8 @@ export default  {
       })
   },
   // 获取项目详情页
-  getDetail: (req, res) => {
-    if (!req.params.id) return res.json({ status: 1, msg: '项目id丢失' });
+  getDetail(req, res) {
+    if (!req.params.id) return res.json({ status: 1, msg: '项目id错误' });
     const query = { _id: req.params.id };
     const op = {
       _id: 1,
@@ -202,7 +178,7 @@ export default  {
     projectHandlers.getDetail(query, op)
       .then((result) => {
         if (!result) {
-          return res.json({ status: 0, msg: '项目不存在' })
+          return res.json({ status: 1, msg: '项目不存在' })
         }
         res.json({ status: 0, msg: '获取成功', data: result });
       })
@@ -214,7 +190,7 @@ export default  {
       })
   },
   // 创建项目
-  createProject: (req, res) => {
+  createProject(req, res) {
     const uid = '1123234'; // 测试用
     // const uid = req.session.uid;
 
@@ -260,17 +236,8 @@ export default  {
       });
   },
   // 修改项目
-  modifyProject: (req, res) => {
+  modifyProject(req, res) {
     const query = { _id: req.params.id };
-    const data = {
-      project_name: req.body.project_name, // 项目名称
-      description: req.body.description, // 项目概要
-      detail: req.body.detail, // 项目要求
-      imagePath: req.body.imagePath, // 项目图片
-      project_link: req.body.project_link, // 项目链接
-      mod_time: Date.now()
-    }
-
     // 检验参数
     let msg = '';
     if (!req.body.project_name) {
@@ -294,6 +261,15 @@ export default  {
       return res.json({ status: 1, msg });
     }
 
+    const data = {
+      project_name: req.body.project_name, // 项目名称
+      description: req.body.description, // 项目概要
+      detail: req.body.detail, // 项目要求
+      imagePath: req.body.imagePath, // 项目图片
+      project_link: req.body.project_link, // 项目链接
+      mod_time: Date.now()
+    };
+
     projectHandlers.verify(query)
       .then((result) => {
         if (result) {
@@ -310,10 +286,10 @@ export default  {
 
   },
   /* 点赞*/
-  doStar: (req, res) => {
+  doStar(req, res) {
     //const uid = req.session.uid;
-    const uid = "123";
-    if (!req.body.pid) return res.json({ status: 1, msg: "请检查项目id" });
+    const uid = '23';// 测试
+    if (!req.body.pid) return res.json({ status: 1, msg: '请检查项目id' });
     const query = { _id: req.body.pid };
     const filter = {
       _id: 0,
@@ -330,7 +306,7 @@ export default  {
               star_count = result.star_count;
               star_users = result.star_users;
             });
-          // 防止重复点赞功能;
+          /* 防止重复点赞功能;
           const temp = star_users.every((val) => {
             if (val === uid) return false;
             return true;
@@ -342,6 +318,9 @@ export default  {
             star_count += 1;
             return res.json({ status: 1, msg: '请不要重复点赞' });
           }
+          */
+          star_count += 1;
+          star_users.push(uid);
           const data = {
             star_count,
             star_users
@@ -354,7 +333,7 @@ export default  {
       })
       .catch((err) => {
         if (err) throw err;
-        res.json({ status: 1, msg: "该项目不存在" });
+        res.json({ status: 1, msg: err.message });
       });
   }
 }
