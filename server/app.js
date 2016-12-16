@@ -3,14 +3,15 @@ import path from 'path';
 import Express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import logger from 'morgan';
+// import logger from 'morgan';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
+import log4js from 'log4js';
 let RedisStore = connectRedis(session);
 // 引入路由
 import routes from './routes';
 /* config */
-import {redisClient} from './config';
+import {redisClient,accessLogger} from './config';
 
 const app = new Express();
 
@@ -26,7 +27,8 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // use morgan to log requests to the console
-app.use(logger('dev'));
+// app.use(logger('dev'));
+app.use(log4js.connectLogger(accessLogger, { level: log4js.levels.INFO, format : ':remote-addr :response-time ms ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"' }));//日志
 
 app.use(session({
   secret: '%S43Xdj$',

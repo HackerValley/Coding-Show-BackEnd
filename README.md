@@ -85,7 +85,25 @@ server
 ```
 ## 6. 运行调试
 
-首先在项目目录下运行 `npm install` 安装所有依赖，推荐使用 webstorm2016来启动应用。
+第一次运行之前首先保证将目录下的config.example.json复制一份，然后改名为config.json,这个文件的格式如下：
+
+```json
+{
+  "description" : "这个文件存放项目的配置信息，使用的时候需要复制出来一份，然后改名为config.json",
+  "port" : "http服务启动的端口号",
+  "accessLogFile" : "访问日志存放路径",
+  "errorLogFile" : "错误日志存放路径",
+  "mongoConfig" : {
+    "option" : {},
+    "url" : "mongodb连接字符串"
+  },
+  "redisConfig" : {
+    "url" :"redis连接字符串"
+  }
+}
+```
+
+然后在项目目录下运行 `npm install` 安装所有依赖，推荐使用 webstorm2016来启动应用。
 
 ### 6.1 webstorm 运行调试配置
 

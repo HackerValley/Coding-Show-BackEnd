@@ -22,7 +22,7 @@ router.get('/api/user/oauth2/:snsType');
 //第三方登录回调
 router.get('/api/user/oauth2/callback/:snsType');
 
-  //userControllers(app);
+//userControllers(app);
 // 添加项目模板
 router.get('/api/projects/new', /*LOGIN_CHECK_MIDDLE,*/ projectController.getNew);
 // 获取项目列表
@@ -37,10 +37,18 @@ router.get('/api/projects/:id', projectController.getDetail);
 router.post('/api/projects', /*LOGIN_CHECK_MIDDLE,*/ projectController.createProject);
 // 修改项目
 router.put('/api/projects/:id', /*LOGIN_CHECK_MIDDLE,*/ projectController.modifyProject);
+<<<<<<< HEAD
 //点赞
 router.post('/api/projects/star', /*LOGIN_CHECK_MIDDLE,*/ projectController.doStar);
 // 参与开发 
+=======
+
+// 参与开发
+>>>>>>> dc6522b7231dcea979cc625609264143021e9324
 router.post('/api/developers', /*LOGIN_CHECK_MIDDLE,*/developerController.joinProject);
+
+//点赞
+router.post('/api/projects/star', /*LOGIN_CHECK_MIDDLE,*/ projectController.doStar);
 
 // 留言获取
 router.get('/api/comment/:id', commentController.fetchOne);

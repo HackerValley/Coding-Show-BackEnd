@@ -26,8 +26,10 @@
     "express": "~4.14.0",
     "express-session": "^1.14.2",
     "jsonwebtoken": "7.1.9",
+    "log4js": "^1.0.1",
     "mongoose": "^4.6.7",
     "morgan": "~1.7.0",
+    "node-slogger": "^0.0.5",
     "redis": "^2.6.3"
   },
   "devDependencies": {
