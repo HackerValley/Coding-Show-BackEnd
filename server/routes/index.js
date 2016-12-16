@@ -37,7 +37,8 @@ router.get('/api/projects/:id', projectController.getDetail);
 router.post('/api/projects', /*LOGIN_CHECK_MIDDLE,*/ projectController.createProject);
 // 修改项目
 router.put('/api/projects/:id', /*LOGIN_CHECK_MIDDLE,*/ projectController.modifyProject);
-
+//点赞
+router.post('/api/projects/star', /*LOGIN_CHECK_MIDDLE,*/ projectController.doStar);
 // 参与开发 
 router.post('/api/developers', /*LOGIN_CHECK_MIDDLE,*/developerController.joinProject);
 
