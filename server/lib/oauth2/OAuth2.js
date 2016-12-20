@@ -86,11 +86,14 @@ export default class OAuth2 {
         if (!options.method && options.form) {
             options.method = 'POST';
         }
+        options.headers = Object.assign({
+            'User-Agent': 'coding show backend'
+        },options.headers);
         reqId++;
 
         slogger.trace(description,reqId,'开始请求', options);
         let msg = '';
-        request.post(options, function (error, response, body) {
+        request(options, function (error, response, body) {
             slogger.trace(description,reqId,'请求结束', error, body);
             if (error) {
                 msg = '请求'+description+'时失败';

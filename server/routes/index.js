@@ -18,9 +18,9 @@ router.get('/api/user/logout', userController.logout);
 //用户的登录
 router.post('/api/user/login', userController.login);
 //第三方登录，snsType可选值 github linkedin qq weibo
-router.get('/api/user/oauth2/:snsType');
+router.get('/api/user/oauth2/:snsType', userController.oauth2Login);
 //第三方登录回调
-router.get('/api/user/oauth2/callback/:snsType');
+router.get('/api/user/oauth2/callback/:snsType', userController.oauth2Callback);
 
 //userControllers(app);
 // 添加项目模板

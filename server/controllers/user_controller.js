@@ -72,11 +72,11 @@ export default {
     },
     oauth2Login(req, res) {
         const snsType = req.params.snsType;
-        if (!snsType) {
+        if (!snsType) {console.log('snsType not given');
             return res.sendStatus(404);
         }
-        const instance = getInstance(snsType,req.prototype);
-        if (!instance) {
+        const instance = getInstance(snsType,req.protocol);
+        if (!instance) {console.log('instance not found');
             return res.sendStatus(404);
         }
         instance.getAuthUrl(req,{},function(err,url) {

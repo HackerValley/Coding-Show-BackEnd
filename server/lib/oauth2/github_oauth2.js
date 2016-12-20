@@ -1,7 +1,6 @@
 /**
  * Created by sunny on 2016/12/15.
  */
-import request  from 'request';
 import OAuth2 from './OAuth2';
 import {OAUTH2_CONFIG} from '../../config';
 
@@ -20,11 +19,11 @@ class GithubOAuth2 extends OAuth2 {
         super._doRequest({
             method:'GET',
             url : USER_INFO_URL,
-            desciption:'获取github用户信息',
+            description:'获取github用户信息',
             headers:{Authorization : 'token ' + accessToken}
-        },function(error,  body) {
+        },function(error,  user) {
             if (error) {
-                return callback(err);
+                return callback(error);
             }
             callback(false,{
                 sns_id : user.id,

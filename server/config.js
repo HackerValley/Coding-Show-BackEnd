@@ -28,6 +28,7 @@ slogger.init({errorLogger : log4js.getLogger('error') , disableCustomConsole : t
 export const port = settings.loadNecessaryInt('port');
 
 let mongoConfig = settings.loadNecessaryObject('mongoConfig');
+mongoose.Promise = global.Promise;
 mongoose.connect(mongoConfig.url); // connect to database
 
 let redisConfig = settings.loadNecessaryObject('redisConfig');
