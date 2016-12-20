@@ -12,11 +12,12 @@ const UserSchema =  new Schema({
     access_token: {typte:String,default:''}, // 第三方token
     expire_time: String, // token的失效时间
     sns_type: {type:Number,default:0}, // 第三方用户类型 微信 qq。。。
+    sns_id : {type:String,default:''},//第三方用户用户ID
     avatar: {type:String,default:''}, // 头像
     create_time: {type:Date, default : Date.now}, // 创建时间
     last_login_time: {type:Date, default : Date.now} // 最后登录时间
 });
-UserSchema.index({username:1},{unique:true});
+UserSchema.index({username:1},{unique:true,sparse:true});
 
 UserSchema.statics = {
     //除非特殊情况，不要在这里写业务逻辑

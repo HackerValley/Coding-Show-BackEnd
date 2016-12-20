@@ -33,3 +33,18 @@ mongoose.connect(mongoConfig.url); // connect to database
 let redisConfig = settings.loadNecessaryObject('redisConfig');
 export const redisClient = redis.createClient(redisConfig);
 
+/**
+ * oauth2 配置类
+ * @typedef OAuth2Config
+ * @type {Object}
+ * @property {String} clientId
+ * @property {String} clientSecret
+ */
+/**
+ * @constant {{github:OAuth2Config,qq:OAuth2Config,weibo:OAuth2Config,linkedin:OAuth2Config}}
+ */
+export const OAUTH2_CONFIG = settings.loadNecessaryObject('oauth2Config');
+export const OAUTH2_TYPE_NUM_MAP = Object.freeze({
+
+});
+export const OAUTH2_CALLBACK_MAX_AGE = 10 * 60 * 1000;

@@ -59,3 +59,7 @@ export function pageViaServer(model,query,params,callback) {
         });
     });
 };
+
+export function refreshUserData(userId,userData,callback) {
+
+}
