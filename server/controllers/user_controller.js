@@ -122,7 +122,7 @@ export default {
             req.session.user = user;
             let url = '/static/user.html';
             if (state.redirect) {
-                url += '?redirect=' + state.redirect;
+                url += '?redirect=' + encodeURIComponent(state.redirect);
             }
             res.redirect(url);
         });
