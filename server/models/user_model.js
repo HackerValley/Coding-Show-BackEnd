@@ -22,5 +22,11 @@ UserSchema.index({username:1},{unique:true,sparse:true});
 UserSchema.statics = {
     //除非特殊情况，不要在这里写业务逻辑
 };
-
+export const USER_TYPE = Object.freeze({
+    PHONE : 0,
+    QQ : 1,
+    WEIBO : 2,
+    GITHUB : 3,
+    LINKEDIN : 4
+});
 export default mongoose.model('coding_show_user', UserSchema);

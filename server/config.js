@@ -45,7 +45,4 @@ export const redisClient = redis.createClient(redisConfig);
  * @constant {{github:OAuth2Config,qq:OAuth2Config,weibo:OAuth2Config,linkedin:OAuth2Config}}
  */
 export const OAUTH2_CONFIG = settings.loadNecessaryObject('oauth2Config');
-export const OAUTH2_TYPE_NUM_MAP = Object.freeze({
-
-});
 export const OAUTH2_CALLBACK_MAX_AGE = 10 * 60 * 1000;
