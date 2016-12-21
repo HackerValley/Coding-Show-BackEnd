@@ -1,5 +1,6 @@
 import slogger from 'node-slogger';
 import async from 'async';
+import {Types} from 'mongoose';
 import userModel from '../models/user_model';
 import authHelper from '../helpers/auth_helper';
 import {refreshUserData} from '../helpers/model_helper';
@@ -25,7 +26,10 @@ export default   {
     },
     // 查询某个用户信息
     getOne(someInfo,callback) {
-        userModel.findOne( someInfo,(err,item) => {
+        if (someInfo._id) {
+            someInfo._id = new Types.ObjectId(someInfo._id);
+        }
+        userModel.findOne( someInfo, '-passwd', (err,item) => {
             if( err ){
                 console.error('查找用户时失败',err);
                 return callback('查找用户时失败');
@@ -103,14 +107,14 @@ export default   {
                     refreshUserData(dbUser._id,snsUser,function (err) {
 
                     });
-                    return callback(false,Object.assign(dbUser,snsUser));
+                    return callback(false,Object.assign(dbUser,snsUser),state);
                 }
                 new userModel(snsUser).save(function(err,userInfo) {
                     if (err) {
                         slogger.error('保存用户数据时失败',err);
                         return callback('保存用户数据时失败');
                     }
-                    callback(false,userInfo);
+                    callback(false,userInfo,state);
                 });
             }
         ],callback);

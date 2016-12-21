@@ -42,7 +42,18 @@ export default {
 
     },
     getInfo(req, res) {
-        res.send('This is user info!');
+        let userId = req.params.id;
+        if (!userId && req.session.user) {
+            userId = req.session.user._id;
+        } else {
+            return res.send({status:1,msg:'用户ID不存在'});
+        }
+        userHandler.getOne({_id:userId},function(err,user) {
+            if (err) {
+                return res.send({status:2,msg:err});
+            }
+            res.send({status:0,data:user});
+        });
     },
     getInfoByUsername(req, res) {
         //TODO check param
@@ -79,7 +90,12 @@ export default {
         if (!instance) {console.log('instance not found');
             return res.sendStatus(404);
         }
-        instance.getAuthUrl(req,{},function(err,url) {
+        const redirect = req.query.redirect;
+        const data = {};
+        if (redirect) {
+            data.redirect = redirect;
+        }
+        instance.getAuthUrl(req,data,function(err,url) {
             if (err) {
                 return res.render('error',{error:err});
             }
@@ -98,11 +114,17 @@ export default {
         if (!state) {
             return res.render('error',{error:'非法验证信息'});
         }
-        userHandler.oauth2Callback(code, state, req, function(err,user) {
+        userHandler.oauth2Callback(code, state, req, function(err,user,state) {
             if (err) {
                 return res.render('error',{error:err});
             }
-            res.send(user);
+            user.passwd = undefined;
+            req.session.user = user;
+            let url = '/static/user.html';
+            if (state.redirect) {
+                url += '?redirect=' + state.redirect;
+            }
+            res.redirect(url);
         });
 
     }

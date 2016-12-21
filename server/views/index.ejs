@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <title><%= title %></title>
-    <!--<link rel='stylesheet' href='/stylesheets/style.css' />-->
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <ul>
-      <li><a href="/api/user/oauth2/github">github</a></li>
+      <li><a href="/api/user/oauth2/github?redirect=<%=encodeURIComponent('https://google.com.hk/#newwindow=1&safe=strict&q=%E9%B2%B8%E4%BA%91%E7%BD%91')%>">github</a></li>
     </ul>
   </body>
 </html>
