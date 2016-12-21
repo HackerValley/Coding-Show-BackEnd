@@ -10,7 +10,7 @@
   "redisConfig" : {
     "url" :"redis://127.0.0.1:6379/0"
   },
-  "oauth2Desc":"配置信息参见：https://trello.com/c/qa044n9z/14--",
+  "oauth2ConfigDesc":"配置信息参见：https://trello.com/c/qa044n9z/14--",
   "oauth2Config" : {
     "github" : {
       "clientId" : "",

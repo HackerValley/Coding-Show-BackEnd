@@ -99,11 +99,18 @@ server
   },
   "redisConfig" : {
     "url" :"redis连接字符串"
+  },
+  "oauth2ConfigDesc":"配置信息参见：https://trello.com/c/qa044n9z/14--",
+  "oauth2Config" : {
+    "github" : {
+      "clientId" : "",
+      "clientSecret" : ""
+    }
   }
 }
 ```
 
-然后在项目目录下运行 `npm install` 安装所有依赖，推荐使用 webstorm2016来启动应用。
+然后在项目目录下运行 `npm install` 安装所有依赖，由于第三方网站登录回调需要回调到www.coding-show.com这个域名上，所以需要做一个反向代理，具体配置参见[这里](https://github.com/HackerValley/Coding-Show-BackEnd/wiki/server_config)。
 
 ### 6.1 webstorm 运行调试配置
 
