@@ -17,8 +17,9 @@ router.post('/api/user/register', userController.doRegister);
 router.get('/api/user/logout', userController.logout);
 //用户的登录
 router.post('/api/user/login', userController.login);
-//获取用户信息
-router.get('/api/user',userController.getInfo);
+//获取当前登录用户信息
+router.get('/api/user', LOGIN_CHECK_MIDDLE, userController.getInfo);
+//根据ID获取用户信息
 router.get('/api/user/:id',userController.getInfo);
 //第三方登录，snsType可选值 github linkedin qq weibo
 router.get('/api/user/oauth2/:snsType', userController.oauth2Login);
