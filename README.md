@@ -128,6 +128,10 @@ server
 
 运行 `npm test`。
 
-## 7. license
+## 7. 部署
+
+项目使用 [pm2](http://pm2.keymetrics.io/) 来实现生产环境的进程管理工具。在继续下面操作之前需要保证你在全局中安装了 pm2 包。第一次运行前，需要复制 `process.example.json` 一份，然后重命名为 `process.json`。分别指定 `process.json` 中的属性 `error_file` 和 `out_file` 为错误日志输出路径和普通日志输出日志。最后运行命令 `make`，即可完成项目启动。
+
+## 8. license
 
 MIT
