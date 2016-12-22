@@ -2,5 +2,5 @@
 /config.json
 /.idea
 /dist
-
+/process.json
 *.log
