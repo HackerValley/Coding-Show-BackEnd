@@ -91,7 +91,6 @@ server
 {
   "description" : "这个文件存放项目的配置信息，使用的时候需要复制出来一份，然后改名为config.json",
   "port" : "http服务启动的端口号",
-  "accessLogFile" : "访问日志存放路径",
   "errorLogFile" : "错误日志存放路径",
   "mongoConfig" : {
     "option" : {},

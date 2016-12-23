@@ -1,7 +1,6 @@
 {
   "description" : "这个文件存放项目的配置信息，使用的时候需要复制出来一份，然后改名为config.json",
   "port" : "8800",
-  "accessLogFile" : "d:/temp/log/backend.access.log",
   "errorLogFile" : "d:/temp/log/backend.error.log",
   "mongoConfig" : {
     "option" : {},
