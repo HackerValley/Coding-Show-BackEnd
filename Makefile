@@ -18,7 +18,7 @@ pull:
 	git pull origin $(branch)
 
 build:
-	babel server -d $(dist)
+	babel server -d $(dist);cp -R server/views dist/views;cp -R server/public dist/public
 
 test:
 	mocha --recursive $(dist)/test/mocha
