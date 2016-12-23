@@ -2,10 +2,14 @@ PATH  := node_modules/.bin:$(PATH)
 SHELL := /bin/bash
 dist := dist
 branch := develop
+now := $(shell date '+%Y%m%d%H%M%S')
 
 #.RECIPEPREFIX +=
 
-all: pull build run
+all: tag pull build run
+
+tag:
+	git tag bak_$(now)
 
 install:
 	cnpm install
