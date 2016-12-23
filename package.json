@@ -5,9 +5,9 @@
   "main": "server/index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register --recursive server/test/mocha",
-    "start": "nodemon server/bin/www --exec babel-node",
+    "start": "nodemon server/bin/www.js --exec babel-node",
     "build": "babel server -d dist",
-    "serve": "node dist/bin/www"
+    "serve": "node dist/bin/www.js"
   },
   "repository": {
     "type": "git",

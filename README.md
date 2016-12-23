@@ -49,7 +49,7 @@ server
     │  app.js  express构造文件
     │  config.js 全局配置信息
     ├─bin  
-    │  └─www 服务启动文件
+    │  └─www.js 服务启动文件
     │      
     ├─controllers  //业务逻辑处理
     │      comment_controller.js
@@ -113,7 +113,7 @@ server
 
 ### 6.1 webstorm 运行调试配置
 
-新建一个Node配置项，然后配置 `Node interprter` 为 ${project_dir}/node_modules/.bin/babel-node （${project_dir}为你的项目所在路径）, 配置 `Javascript file` 为 server/bin/www 。
+新建一个Node配置项，然后配置 `Node interprter` 为 ${project_dir}/node_modules/.bin/babel-node （${project_dir}为你的项目所在路径）, 配置 `Javascript file` 为 server/bin/www.js 。
 
 ### 6.2 webstorm 测试配置
 
