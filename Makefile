@@ -15,7 +15,7 @@ install:
 	cnpm install
 
 pull:
-	git pull origin $(develop)
+	git pull origin $(branch)
 
 build:
 	babel server -d $(dist)
