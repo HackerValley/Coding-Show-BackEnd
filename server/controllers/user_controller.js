@@ -74,7 +74,7 @@ export default {
                 return res.send({status:1,msg:err});
             }
             req.session.user = user;
-            res.send({status:0});
+            res.send({status:0,data:user});
         });
     },
     logout(req, res) {
