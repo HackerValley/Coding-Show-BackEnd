@@ -48,20 +48,19 @@ export default class OAuth2 {
 
     }
 
-    _createAuthParamsString(goto, state) {
-        return '?client_id=' + this.clientId + '&response_type=code&redirect_uri=' + encodeURIComponent(this.redirectUri + '?goto=' + encodeURIComponent(goto)) + '&state=' + state;
+    _createAuthParamsString(state) {
+        return '?client_id=' + this.clientId + '&response_type=code&redirect_uri=' + encodeURIComponent(this.redirectUri) + '&state=' + state;
     }
 
     getAuthUrl(req, params, callback) {
         let self = this;
-        let goto = params.goto;
-        params.goto = undefined;
+
         this._createState(req, params, function (err, state) {
             if (err) {
                 callback(err);
                 return;
             }
-            let url = self.authUrl + self._createAuthParamsString(goto, state);
+            let url = self.authUrl + self._createAuthParamsString(state);
             callback(false, url);
         });
     }
