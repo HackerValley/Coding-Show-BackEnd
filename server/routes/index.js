@@ -9,7 +9,7 @@ const LOGIN_CHECK_MIDDLE = [authMiddle.needLogin];
 
   // 测试
 router.get('/', function (req, res) {
-    res.render('index',{title:'backend'});
+    res.redirect('/static');
 });
 // 用户注册
 router.post('/api/user/register', userController.doRegister);
