@@ -24,6 +24,7 @@ export const accessLogger = log4js.getLogger('console');
 slogger.init({errorLogger : log4js.getLogger('error') , disableCustomConsole : true});
 
 export const port = settings.loadNecessaryInt('port');
+export const domain = settings.loadNecessaryString('domain');
 
 let mongoConfig = settings.loadNecessaryObject('mongoConfig');
 mongoose.Promise = global.Promise;

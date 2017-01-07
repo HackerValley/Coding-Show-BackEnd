@@ -11,7 +11,7 @@ let RedisStore = connectRedis(session);
 // 引入路由
 import routes from './routes';
 /* config */
-import {redisClient,accessLogger} from './config';
+import {domain,redisClient,accessLogger} from './config';
 
 const app = new Express();
 
@@ -32,7 +32,7 @@ app.use(log4js.connectLogger(accessLogger, { level: log4js.levels.INFO, format :
 
 app.use(session({
   secret: '%S43Xdj$',
-  cookie:{},
+  cookie:{domain},
   key:'coding_show',
   resave:false,
   saveUninitialized:false,

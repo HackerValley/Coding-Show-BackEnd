@@ -8,8 +8,8 @@ let router = express.Router();
 const LOGIN_CHECK_MIDDLE = [authMiddle.needLogin];
 
   // 测试
-router.get('/', function (req, res) {
-    res.redirect('/static');
+router.get('/api', function (req, res) {
+    res.render('index',{title:'backend'});
 });
 // 用户注册
 router.post('/api/user/register', userController.doRegister);
