@@ -1,4 +1,4 @@
-import projectHandlers from '../handlers/project_handlers.js';
+import projectHandlers from '../handlers/project_handlers';
 // 登录校验
 //import { checkLogin } from '../middleware';
 import slogger from 'node-slogger';
@@ -10,157 +10,43 @@ export default  {
   },
   // 获取项目列表
   getList(req, res) {
-    let record_total = 0;
-    let sort_key = { create_time: -1 };// 测试
+    let _query = req.query;
+    // 分页
+    const page_num = parseInt(_query.page_num,10);
+    const page_size = parseInt(_query.page_size,10);
+    projectHandlers.getList({},page_num,page_size,(err,page) => {
+      if (err) {
+        return res.send({status:1,msg:err});
+      }
+      res.send({status:0,data:page});
+    });
+
+  },
+
+  // 获取我的项目
+  getMine(req, res) {
+    let _query = req.query;
+    const queryType = _query.query_type;
     const query = {};
-
-    projectHandlers.getCount(query)
-      .then((result) => {
-        if (result) {
-          record_total = result;
-        } else {
-          return res.json({ status: 1, msg: '没有项目' });
-        }
-      })
-      .catch(err => {
-        if (err) throw new Error(err);
-      });
-
+    const userId = req.session.user._id;
+    if (queryType === 'release') {
+      query.uid = userId;
+    } else if (queryType === 'develop') {
+      query.develop = userId;
+    } else {
+      return res.send({status:1,msg:'不支持的查询类型'});
+    }
     // 分页
-    const page_num = req.body.page_num || 1;
-    const page_size = req.body.page_size || 12;
-    const page_total = Math.floor(record_total / page_size) + 1;
-    const op = {
-      create_time: 1,
-      pid: 1,
-      project_name: 1,
-      star_count: 1,
-      uid: 1
-    };
-    const pages = {
-      skip: (page_num - 1) * page_size,
-      limit: page_size,
-      sort: sort_key
-    };
-
-    projectHandlers.getList(query, op, pages)
-      .then((result) => {
-        res.json({
-          status: 0,
-          msg: '获取项目列表',
-          data: {
-            page_num,
-            page_size,
-            page_total,
-            projects_total: record_total,
-            list: result
-          }
-        });
-      })
+    const page_num = parseInt(_query.page_num,10);
+    const page_size = parseInt(_query.page_size,10);
+    projectHandlers.getList(query,page_num,page_size,(err,page) => {
+        if (err) {
+            return res.send({status:1,msg:err});
+        }
+        res.send({status:0,data:page});
+    });
   },
 
-  // 获取我发布的项目
-  getRelease(req, res) {
-    const uid = req.session.uid;
-    let sort_key = { create_time: -1 };// 测试
-    const query = { uid };
-    let record_total = 0;
-
-    projectHandlers.getCount(query)
-      .then((result) => {
-        if (result) {
-          record_total = result;
-        } else {
-          return res.json({ status: 1, msg: '没有项目' });
-        }
-      })
-      .catch((err) => {
-        if (err) throw new Error(err);
-      });
-
-
-    const op = {
-      create_time: 1,
-      pid: 1,
-      project_name: 1,
-      star_count: 1,
-      uid: 1
-    };
-
-    // 分页
-    const page_num = req.body.page_num || 1;
-    const page_size = req.body.page_size || 12;
-    const page_total = Math.floor(record_total / page_size) + 1;
-    const pages = {
-      skip: (page_num - 1) * page_size,
-      limit: page_size,
-      sort: sort_key
-    };
-
-    projectHandlers.getList(query, op, pages)
-      .then((result) => {
-        res.json({
-          status: 0,
-          msg: '获取项目列表',
-          data: {
-            page_num,
-            page_size,
-            page_total,
-            projects_total: record_total,
-            list: result
-          }
-        });
-      });
-  },
-  // 获取我开发的项目
-  getDev(req, res) {
-    const uid = req.session.uid;
-    let record_total = 0;
-    let sort_key = { create_time: -1 };// 测试
-    projectHandlers.getCountD(uid)
-      .then((result) => {
-        if (result) {
-          record_total = result;
-        } else {
-          return res.json({ status: 1, msg: '没有项目' });
-        }
-      })
-      .catch(err => {
-        if (err) throw new Error(err);
-      });
-
-    const op = {
-      create_time: 1,
-      pid: 1,
-      project_name: 1,
-      star_count: 1
-    };
-
-    // 分页
-    const page_num = req.body.page_num || 1;
-    const page_size = req.body.page_size || 12;
-    const page_total = Math.floor(record_total / page_size) + 1;
-    const pages = {
-      skip: (page_num - 1) * page_size,
-      limit: page_size,
-      sort: sort_key
-    };
-
-    projectHandlers.getListD(uid, op, pages)
-      .then((result) => {
-        res.json({
-          status: 0,
-          msg: '获取项目列表',
-          data: {
-            page_num,
-            page_size,
-            page_total,
-            projects_total: record_total,
-            list: result
-          }
-        });
-      })
-  },
   // 获取项目详情页
   getDetail(req, res) {
     if (!req.params.id) return res.json({ status: 1, msg: '项目id错误' });

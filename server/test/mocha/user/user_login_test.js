@@ -45,13 +45,12 @@ describe('user login', function() {
                 username: 'test-1480130335119',
                 password:'xxxxxx'
             })
-            .expect(200, {
-                status:0
-            })
+            .expect(200)
             .end(function(err,res) {
                 if (err) {
                     return done(err);
                 }
+                expect(res.body).to.have.property('status').and.equal(0);
                 var header = res.header;
                 var setCookieArray = header['set-cookie'];
 

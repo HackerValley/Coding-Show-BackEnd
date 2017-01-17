@@ -127,7 +127,7 @@ server
 {
   "apps" : [{
     "name"        : "coding-show-backend",
-    "script"      : "./src/bin/www",
+    "script"      : "./server/bin/www",
     "instances"   : 1,
     "exec_interpreter" : "babel-node"
     "watch"       : true,

@@ -1,4 +1,7 @@
+import slogger from 'node-slogger';
+import async from 'async';
 import ProjectModel from '../models/project_model';
+import {pageViaServer} from '../helpers/model_helper';
 
 export default {
   // 获取项目总数
@@ -18,13 +21,15 @@ export default {
       });
   },
   // 获取项目列表 获取我开发的项目列表 获取我发布的项目列表
-  getList: (query, op, page) => {
-    return ProjectModel.find(query, op)
-      .skip(page.skip)
-      .limit(page.limit)
-      .sort(page.sort)
-      .exec((err) => {
-        if (err) throw err;
+  getList(query, pageNum, pageSize, callback) {
+      pageViaServer(ProjectModel,query,{
+        sort:{_id:-1},fields:{star_users:0},pageNum,pageSize
+      },function(err,page){
+        if (err) {
+          slogger.error('获取项目列表时失败',err);
+          return callback('获取项目列表时失败');
+        }
+        callback(false,page);
       });
   },
   getListD: (uid, op, page) => {

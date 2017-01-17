@@ -1,6 +1,7 @@
 /**
  * Created by sunny on 2016/11/26.
  */
+import {expect} from 'chai';
 import request from 'supertest';
 import crypto from 'crypto';
 import app from '../../../app';
@@ -27,8 +28,13 @@ describe('user register', function() {
                 username: username,
                 password:password
             })
-            .expect(200, {
-                status:0
-            },done);
+            .expect(200)
+            .end(function(err,res) {
+                if (err) {
+                    return done(err);
+                }
+                expect(res.body).to.have.property('status').and.equal(0);
+                done();
+            });
     });
 });
