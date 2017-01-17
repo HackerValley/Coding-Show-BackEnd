@@ -3,7 +3,7 @@
     "name"        : "coding-show-backend",
     "script"      : "./dist/bin/www",
     "instances"   : 1,
-    "watch"       : true,
+    "watch"       : false,
     "error_file"  : "/var/log/pm2/coding-show-backend/error.log",
     "out_file"    : "/var/log/pm2/coding-show-backend/out.log",
     "env": {

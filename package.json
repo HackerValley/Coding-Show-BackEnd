@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register --recursive server/test/mocha",
-    "start": "nodemon server/bin/www.js --exec babel-node",
+    "start": "pm2 start process.json",
     "build": "babel server -d dist",
     "serve": "node dist/bin/www.js"
   },

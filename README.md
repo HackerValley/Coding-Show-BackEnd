@@ -121,7 +121,27 @@ server
 
 ### 6.3 命令行运行
 
-运行`npm start`，由于使用了 [nodemon](https://nodemon.io/)，需要全局安装 nodemon 和 babel-cli。
+运行`npm start`，需要全局安装 [pm2](http://pm2.keymetrics.io/) 和 babel-cli, 并且在 `process.json` 中配置 `"exec_interpreter" : "babel-node"`。如果配置`"watch" : true`，则文件更新后会自动重启，windows环境慎用。下面是示例：
+
+```json
+{
+  "apps" : [{
+    "name"        : "coding-show-backend",
+    "script"      : "./src/bin/www",
+    "instances"   : 1,
+    "exec_interpreter" : "babel-node"
+    "watch"       : true,
+    "error_file"  : "/var/log/pm2/coding-show-backend/error.log",
+    "out_file"    : "/var/log/pm2/coding-show-backend/out.log",
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "env_production" : {
+      "NODE_ENV": "production"
+    }
+  }]
+}
+```
 
 ### 6.4 命令行测试
 
@@ -131,6 +151,27 @@ server
 
 项目使用 [pm2](http://pm2.keymetrics.io/) 来实现生产环境的进程管理工具。在继续下面操作之前需要保证你在全局中安装了 pm2 包。第一次运行前，需要复制 `process.example.json` 一份，然后重命名为 `process.json`。分别指定 `process.json` 中的属性 `error_file` 和 `out_file` 为错误日志输出路径和普通日志输出日志。最后运行命令 `make`，即可完成项目启动。
 
+鉴于直接使用 babel 会导致内存泄漏等问题，在 `make` 时会先编译成es5，然后再运行。同时将 `watch` 参数设置为false，以提高性能。最终生产环境的启动文件为：
+
+```json
+{
+  "apps" : [{
+    "name"        : "coding-show-backend",
+    "script"      : "./dist/bin/www.js",
+    "instances"   : 1,
+    "watch"       : false,
+    "error_file"  : "/var/log/pm2/coding-show-backend/error.log",
+    "out_file"    : "/var/log/pm2/coding-show-backend/out.log",
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "env_production" : {
+      "NODE_ENV": "production"
+    }
+  }]
+}
+```
+
 ## 8. license
 
-MIT
+[MIT](https://github.com/HackerValley/Coding-Show-BackEnd/blob/develop/LICENSE)
