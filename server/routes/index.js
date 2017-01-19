@@ -1,9 +1,16 @@
 import userController from '../controllers/user_controller';
 import projectController from '../controllers/project_controller';
 import commentController from '../controllers/comment_controller';
+import fileController from '../controllers/file_controller';
 import developerController from '../controllers/developer_controller';
 import authMiddle from '../middleware/auth_middle';
 import express  from 'express';
+// 文件上传 by汉宇 20170118
+let multer  = require('multer');
+// 通过 fileController中的配置 进行属性定制
+let storage = multer.diskStorage( fileController.diskStorageConfig() );
+// 通过 storage 选项来对 上传行为 进行定制化
+var upload = multer({ storage: storage })
 let router = express.Router();
 const LOGIN_CHECK_MIDDLE = [authMiddle.needLogin];
 
@@ -59,6 +66,12 @@ router.get('/api/comment/:id', commentController.fetchOne);
 // 留言
 router.post('/api/comment', LOGIN_CHECK_MIDDLE, commentController.doComment);
 //developerController(app);
+
+// 文件上传
+router.post('/api/upload', upload.single('attachment'), fileController.doUpfile);
+router.get('/api/upload', function (req, res) {
+    res.render('testForm',{title:'backend'});
+});
 
 //登录测试
 router.get('/api/test/login',LOGIN_CHECK_MIDDLE,function(req,res) {res.send({status:0});});
