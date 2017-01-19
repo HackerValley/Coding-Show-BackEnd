@@ -16,5 +16,10 @@
       "clientId" : "",
       "clientSecret" : ""
     }
+  },
+  "upfile" : {
+    "desc" : "【必须配置项】配置上传的文件存放的路径",
+    "domain" : "www.coding-show.com",
+    "publicPath" : "public/upload/"
   }
 }
