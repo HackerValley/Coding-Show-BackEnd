@@ -10,7 +10,7 @@ let multer  = require('multer');
 // 通过 fileController中的配置 进行属性定制
 let storage = multer.diskStorage( fileController.diskStorageConfig() );
 // 通过 storage 选项来对 上传行为 进行定制化
-var upload = multer({ storage: storage })
+let upload = multer({ storage: storage });
 let router = express.Router();
 const LOGIN_CHECK_MIDDLE = [authMiddle.needLogin];
 
