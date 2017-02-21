@@ -77,8 +77,8 @@ export default  {
   },
   // 创建项目
   createProject(req, res) {
-    const uid = '1123234'; // 测试用
-    // const uid = req.session.uid;
+    // const uid = '1123234'; // 测试用
+    const uid = req.session.user._id;
 
     // 检验参数
     let msg = '';
@@ -191,6 +191,16 @@ export default  {
             .then((result) => {
               star_count = result.star_count;
               star_users = result.star_users;
+                star_count += 1;
+                star_users.push(uid);
+                const data = {
+                    star_count,
+                    star_users
+                };
+                projectHandlers.updateProject(query, data)
+                    .then((result) => {
+                        if (result) res.json({ status: 0, msg: '更新成功' });
+                    });
             });
           /* 防止重复点赞功能;
           const temp = star_users.every((val) => {
@@ -205,16 +215,7 @@ export default  {
             return res.json({ status: 1, msg: '请不要重复点赞' });
           }
           */
-          star_count += 1;
-          star_users.push(uid);
-          const data = {
-            star_count,
-            star_users
-          };
-          projectHandlers.updateProject(query, data)
-            .then((result) => {
-              if (result) res.json({ status: 0, msg: '更新成功' });
-            });
+
         }
       })
       .catch((err) => {
