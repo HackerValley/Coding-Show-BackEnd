@@ -35,7 +35,6 @@ router.get('/api/user/oauth2/callback/:snsType', userController.oauth2Callback);
 
 //userControllers(app);
 // 添加项目模板
-router.get('/api/projects/new', /*LOGIN_CHECK_MIDDLE,*/ projectController.getNew);
 // 获取项目列表
 router.get('/api/projects/list', projectController.getList);
 // 获取我的项目
