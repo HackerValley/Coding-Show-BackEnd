@@ -2,7 +2,8 @@ import commentHandler  from '../handlers/comment_handlers.js';
 export default {
     // 留言获取
     fetchByProjectId(req, res) {
-        commentHandler.fetchAllComment(10, 1, 10, (err, result)=> {
+        let projectId=req.query.id;
+        commentHandler.fetchAllComment(projectId, 1, 10, (err, result)=> {
             res.send(result);
         })
     },
