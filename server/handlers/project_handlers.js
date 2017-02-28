@@ -74,33 +74,31 @@ export default {
       })
   },
   // 点赞功能
-  star: (uid,query, filter, fn) => {
-    ProjectModel.find(query, (err, item) => {
-      if (err) throw  err;
-      return item;
+  star: (uid, query, filter, fn) => {
+    let data = {};
+    ProjectModel.findOne(query, filter).exec((err,item) => {
+      if (err) throw new Error(err);
+      if (!item) {
+        return fn('该项目不存在');
+      } else {
+        //console.log('点赞前\n' + item);
+        item.star_count += 1;
+        item.star_users.push(uid);
+        //console.log('点赞后\n' + item);
+        return item;
+      }
     })
       .then((item) => {
-        if (!item) return fn('该项目不存在');
-        ProjectModel.findOne(query, filter).exec((err, item) => {
-          if (err) throw  err;
-          console.log('点赞前\n'+item);
-          item.star_count += 1;
-          item.star_users.push(uid);
-          console.log('点赞后\n'+item);
-          return item;
-        })
-      })
-      .then((item)=>{
-      console.log('更新前'+item);
-        ProjectModel.findOneAndUpdate( query,{$set:
-          {
-            star_count:item.star_count,
-            star_users:item.star_users
-          }}, (err,item)=>{
-          if (err) throw  err;
+        //console.log('更新前' + item);
+        ProjectModel.findOneAndUpdate(query, {
+          $set: {
+            star_count: item.star_count,
+            star_users: item.star_users
+          }
+        }, (err, item) => {
+          if (err) throw new Error(err);
           if (item) return fn('点赞成功');
         })
       })
-      .catch()
   }
 }
