@@ -19,7 +19,7 @@ class Coding_Mkdir {
     constructor(){
         let dateObj = new Date();
         this.year = dateObj.getFullYear();
-        this.month = Math.floor((  dateObj.getMonth() + 3   ) / 3 );
+        this.month = dateObj.getMonth() + 1;
         this.day = dateObj.getDate();
         // 公共的路径前缀
         let configData = require(__dirname + '/../../config.json');
