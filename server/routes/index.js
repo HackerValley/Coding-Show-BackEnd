@@ -61,7 +61,7 @@ router.post('/api/developers', /*LOGIN_CHECK_MIDDLE,*/developerController.joinPr
 router.post('/api/projects/star', /*LOGIN_CHECK_MIDDLE,*/ projectController.doStar);
 
 // 留言获取
-router.get('/api/comment/:id', commentController.fetchOne);
+router.get('/api/comment/:id', commentController.fetchByProjectId);
 
 // 留言
 router.post('/api/comment', LOGIN_CHECK_MIDDLE, commentController.doComment);

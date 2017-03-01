@@ -2,8 +2,9 @@ import developerHandlers from '../handlers/developer_handlers.js';
 
 export default {
   joinProject(req, res) {
-    const uid = '111'; // 测试
-    //const uid = req.session.uid;
+    // const uid = '111'; // 测试
+    const uid = req.session.user._id;
+    const pid = req.query.pid;
     const data = {
       uid,
       pid: req.body.p_id,
