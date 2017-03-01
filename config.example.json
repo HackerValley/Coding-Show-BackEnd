@@ -18,8 +18,8 @@
     }
   },
   "upfile" : {
-    "desc" : "【必须配置项】配置上传的文件存放的路径",
+    "desc" : "【必须配置项】配置上传的文件存放的路径 1.路径最后必须要有upload",
     "domain" : "www.coding-show.com",
-    "publicPath" : "public/upload/"
+    "publicPath" : "/www/tmp/upload/"
   }
 }

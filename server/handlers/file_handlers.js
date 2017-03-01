@@ -19,7 +19,7 @@ class Coding_Mkdir {
     constructor(){
         let dateObj = new Date();
         this.year = dateObj.getFullYear();
-        this.month = Math.floor((  dateObj.getMonth() + 3   ) / 3 );
+        this.month = dateObj.getMonth() + 1;
         this.day = dateObj.getDate();
         // 公共的路径前缀
         let configData = require(__dirname + '/../../config.json');
@@ -32,18 +32,20 @@ class Coding_Mkdir {
         let pathStr = pathArr.join('/');
         if(this.fullPath){
             let tmpPublicPath = this.publicPath;
-            tmpPublicPath = tmpPublicPath.split('/');
+            let pathPrev = tmpPublicPath.replace('upload/','');
+            // tmpPublicPath = tmpPublicPath.split('/');
+
             if(this.domain && this.domain.indexOf('http') < 0){
                 this.domain = 'http://' + this.domain + '/';
             }
             return {
                 realPath: this.fullPath,
-                webPath: tmpPublicPath[1] + '/' + pathStr+'/',
-                webFullPath: this.domain + tmpPublicPath[1] + '/' + pathStr+'/'
+                webPath: 'upload' + '/' + pathStr+'/',
+                webFullPath: this.domain + 'upload' + '/' + pathStr+'/'
             };
         }
         pathStr = this.publicPath + pathStr;
-        this.fullPath = path.resolve(__dirname + '/../' + pathStr )
+        this.fullPath = path.resolve( pathStr );
         return this.fullPath;
     }
     // 根据路径的字符串创建文件夹  支持 递归的创建
