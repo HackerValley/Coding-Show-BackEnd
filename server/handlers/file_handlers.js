@@ -32,18 +32,20 @@ class Coding_Mkdir {
         let pathStr = pathArr.join('/');
         if(this.fullPath){
             let tmpPublicPath = this.publicPath;
-            tmpPublicPath = tmpPublicPath.split('/');
+            let pathPrev = tmpPublicPath.replace('upload/','');
+            // tmpPublicPath = tmpPublicPath.split('/');
+
             if(this.domain && this.domain.indexOf('http') < 0){
                 this.domain = 'http://' + this.domain + '/';
             }
             return {
                 realPath: this.fullPath,
-                webPath: tmpPublicPath[1] + '/' + pathStr+'/',
-                webFullPath: this.domain + tmpPublicPath[1] + '/' + pathStr+'/'
+                webPath: 'upload' + '/' + pathStr+'/',
+                webFullPath: this.domain + 'upload' + '/' + pathStr+'/'
             };
         }
         pathStr = this.publicPath + pathStr;
-        this.fullPath = path.resolve(__dirname + '/../' + pathStr )
+        this.fullPath = path.resolve( pathStr );
         return this.fullPath;
     }
     // 根据路径的字符串创建文件夹  支持 递归的创建
