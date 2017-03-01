@@ -5,32 +5,45 @@ import {getInstance} from '../lib/oauth2/factory';
 export default {
     doRegister(req, res) {
         let msg = undefined;
-        if(!req.body.username){
+        let _body = req.body;
+        if(!_body.username){
             msg = '请填写正确的用户名';
             return res.send( {
                 status: 1,
                 msg: msg
             } );
         }
-        if(!req.body.email){
+        
+        if(!_body.email){
             msg = '请填写正确的邮箱';
             return res.send( {
                 status: 2,
                 msg: msg
             } );
         }
-        if(!req.body.password){
+        if(!_body.password){
             msg = '请填写密码';
             return res.send( {
                 status: 3,
                 msg: msg
             } );
         }
+        if (!_body.phone) {
+            return res.send({status:4,msg:'请填写手机号'});
+        }
+        const nickname = _body.nickname;
+        if (!nickname) {
+            return res.send({status:5,msg:'请填写昵称'});
+        }
+        
 
         let userInfoJson = {
-            username: req.body.username,
-            email: req.body.email,
-            passwd: req.body.password
+            username: _body.username,
+            email: _body.email,
+            phone : _body.phone,
+            avatar : _body.avatar || '',
+            nickname : nickname,
+            passwd: _body.password
         };
 
         userHandler.addUser(userInfoJson,function(err){
@@ -120,7 +133,7 @@ export default {
             }
             user.passwd = undefined;
             req.session.user = user;
-            let url = '/static/user.html';
+            let url = '/#/oauth2/success';
             if (state.redirect) {
                 url += '?redirect=' + encodeURIComponent(state.redirect);
             }

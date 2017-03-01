@@ -15,7 +15,9 @@ describe('user register', function() {
             .send({
                 username: username,
                 password:password,
-                email:Math.random()+'@xxx.com'
+                nickname:username,
+                email:Math.random()+'@xxx.com',
+                phone:(Math.random()+'').replace('0.','')
             })
             .expect(200, {
                 status:0

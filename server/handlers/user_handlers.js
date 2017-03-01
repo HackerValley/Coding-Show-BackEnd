@@ -40,16 +40,41 @@ export default   {
     },
     // 添加用户
     addUser(userInfo,callback) {
-//TODO 检查唯一性
-        userInfo.passwd = authHelper.passwdSign(userInfo.username,userInfo.passwd);
-        new userModel(userInfo).save((err, userInfo)=>{
-            if( err ){
-                console.error('添加用户失败',err);
-                return callback('添加用户失败');
+        async.waterfall([
+            function(callback) {
+                userModel.findOne({phone:userInfo.phone},'_id',function(err,item) {
+                    if (err) {
+                        slogger.error('获取用户信息时失败',err);
+                        return callback('获取用户信息时失败');
+                    }
+                    if (item) {
+                        return callback('当前手机号已经存在');
+                    }
+                    callback(false);
+                });
+            },function(callback) {
+                userModel.findOne({email:userInfo.email},'_id',function(err,item) {
+                    if (err) {
+                        slogger.error('获取用户信息时失败2',err);
+                        return callback('获取用户信息时失败2');
+                    }
+                    if (item) {
+                        return callback('当前邮箱已经存在');
+                    }
+                    callback(false);
+                });
+            },function(callback) {
+                userInfo.passwd = authHelper.passwdSign(userInfo.username,userInfo.passwd);
+                new userModel(userInfo).save((err, userInfo)=>{
+                    if( err ){
+                        console.error('添加用户失败',err);
+                        return callback('添加用户失败');
+                    }
+                    callback(false,userInfo);
+                });
             }
-            callback(false,userInfo);
-        });
-
+        ],callback);
+        
     },
 
     oauth2Callback(code,state,req,callback) {
