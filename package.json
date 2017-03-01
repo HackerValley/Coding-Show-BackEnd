@@ -29,7 +29,11 @@
     "log4js": "^1.0.1",
     "mongoose": "^4.6.7",
     "morgan": "~1.7.0",
+<<<<<<< Updated upstream
     "multer": "^1.3.0",
+=======
+    "multer": "^1.2.1",
+>>>>>>> Stashed changes
     "node-slogger": "^0.0.5",
     "redis": "^2.6.3",
     "request": "^2.79.0"
