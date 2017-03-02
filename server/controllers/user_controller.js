@@ -58,7 +58,8 @@ export default {
         let userId = req.params.id;
         if (!userId && req.session.user) {
             userId = req.session.user._id;
-        } else {
+        }
+        if (!userId) {
             return res.send({status:1,msg:'用户ID不存在'});
         }
         userHandler.getOne({_id:userId},function(err,user) {

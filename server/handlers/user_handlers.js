@@ -64,6 +64,17 @@ export default   {
                     callback(false);
                 });
             },function(callback) {
+                userModel.findOne({username:userInfo.username},'_id',function(err,item) {
+                    if (err) {
+                        slogger.error('获取用户信息时失败3',err);
+                        return callback('获取用户信息时失败3');
+                    }
+                    if (item) {
+                        return callback('当前帐号已经存在');
+                    }
+                    callback(false);
+                });
+            },function(callback) {
                 userInfo.passwd = authHelper.passwdSign(userInfo.username,userInfo.passwd);
                 new userModel(userInfo).save((err, userInfo)=>{
                     if( err ){
