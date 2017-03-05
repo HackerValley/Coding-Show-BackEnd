@@ -150,7 +150,7 @@ server
 
 ## 7. 部署
 
-* 除非操作nginx redis mongo，项目代码不要使用root来操作!
+
 项目使用 [pm2](http://pm2.keymetrics.io/) 来实现生产环境的进程管理工具。在继续下面操作之前需要保证你在全局中安装了 pm2 包。第一次运行前，需要复制 `process.example.json` 一份，然后重命名为 `process.json`。分别指定 `process.json` 中的属性 `error_file` 和 `out_file` 为错误日志输出路径和普通日志输出日志。最后运行命令 `make`，即可完成项目启动。
 
 鉴于直接使用 babel 会导致内存泄漏等问题，在 `make` 时会先编译成es5，然后再运行。同时将 `watch` 参数设置为false，以提高性能。最终生产环境的启动文件为：
@@ -173,6 +173,7 @@ server
   }]
 }
 ```
+**注意，除非操作nginx redis mongo，不要使用root来部署更新项目代码!**
 
 ## 8. license
 
