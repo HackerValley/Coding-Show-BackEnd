@@ -77,8 +77,9 @@ export default  {
   },
   // 创建项目
   createProject(req, res) {
-    // const uid = '1123234'; // 测试用
-    const uid = req.session.user._id;
+    // 测试用
+    const uid = '1123234';
+    //const uid = req.session.user._id;
 
     // 检验参数
     let msg = '';
@@ -156,25 +157,16 @@ export default  {
       mod_time: Date.now()
     };
 
-    projectHandlers.verify(query)
-      .then((result) => {
-        if (result) {
-          projectHandlers.updateProject(query, data)
-            .then((result) => {
-              if (result) res.json({ status: 0, msg: '更新成功' });
-            });
-        }
-      })
-      .catch((err) => {
-        if (err) throw err;
-        res.json({ status: 1, msg: "该项目不存在" });
-      });
-
+    projectHandlers.updateProject(query, data, function (msg) {
+        if  (msg) res.json({status:0,msg:msg});
+    });
   },
   /* 点赞*/
   doStar(req, res) {
-    //const uid = req.session.uid;
-    const uid = '23';// 测试
+
+    // 测试
+    const uid = '1123234';
+    //const uid = req.session.user._id;
     if (!req.body.pid) return res.json({ status: 1, msg: '请检查项目id' });
     const query = { _id: req.body.pid };
     const filter = {
@@ -184,43 +176,8 @@ export default  {
     };
     let star_users = [];
     let star_count = 0;
-    projectHandlers.verify(query)
-      .then((result) => {
-        if (result) {
-          projectHandlers.getDetail(query, filter)
-            .then((result) => {
-              star_count = result.star_count;
-              star_users = result.star_users;
-                star_count += 1;
-                star_users.push(uid);
-                const data = {
-                    star_count,
-                    star_users
-                };
-                projectHandlers.updateProject(query, data)
-                    .then((result) => {
-                        if (result) res.json({ status: 0, msg: '更新成功' });
-                    });
-            });
-          /* 防止重复点赞功能;
-          const temp = star_users.every((val) => {
-            if (val === uid) return false;
-            return true;
-          });
-          if (temp) {
-            star_users.push(uid);
-          } else {
-            star_users = [];
-            star_count += 1;
-            return res.json({ status: 1, msg: '请不要重复点赞' });
-          }
-          */
-
-        }
-      })
-      .catch((err) => {
-        if (err) throw err;
-        res.json({ status: 1, msg: err.message });
-      });
+    projectHandlers.star(uid,query,filter,function (msg) {
+      if (msg) res.json({ status:0, msg:msg });
+    })
   }
 }
