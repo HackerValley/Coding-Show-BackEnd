@@ -32,7 +32,7 @@ export default  {
     if (queryType === 'release') {
       query.uid = userId;
     } else if (queryType === 'develop') {
-      query.develop = userId;
+      query['developers._id'] = userId;
     } else {
       return res.send({status:1,msg:'不支持的查询类型'});
     }
@@ -77,9 +77,7 @@ export default  {
   },
   // 创建项目
   createProject(req, res) {
-    // 测试用
-    const uid = '1123234';
-    //const uid = req.session.user._id;
+    const uid = req.session.user._id;
 
     // 检验参数
     let msg = '';
@@ -164,9 +162,7 @@ export default  {
   /* 点赞*/
   doStar(req, res) {
 
-    // 测试
-    const uid = '1123234';
-    //const uid = req.session.user._id;
+    const uid = req.session.user._id;
     if (!req.body.pid) return res.json({ status: 1, msg: '请检查项目id' });
     const query = { _id: req.body.pid };
     const filter = {
