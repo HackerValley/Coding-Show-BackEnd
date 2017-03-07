@@ -1,5 +1,6 @@
 import slogger from 'node-slogger';
 import async from 'async';
+import mongoose from 'mongoose';
 import ProjectModel from '../models/project_model';
 import {pageViaServer} from '../helpers/model_helper';
 
@@ -22,6 +23,9 @@ export default {
   },
   // 获取项目列表 获取我开发的项目列表 获取我发布的项目列表
   getList(query, pageNum, pageSize, callback) {
+    if (query['developers._id']) {
+      query['developers._id'] = mongoose.Types.ObjectId(query['developers._id']);
+    }
     pageViaServer(ProjectModel, query, {
       sort: {_id: -1}, fields: {star_users: 0}, pageNum, pageSize
     }, function (err, page) {
