@@ -2,8 +2,16 @@ import commentHandler  from '../handlers/comment_handlers.js';
 export default {
     // 留言获取
     fetchByProjectId(req, res) {
-        let projectId=req.query.id;
-        commentHandler.fetchAllComment(projectId, 1, 10, (err, result)=> {
+        let pid = req.params.id;
+        if(!pid){
+            return res.send({
+                status: 1,
+                msg: '项目ID不能为空',
+            });
+        }
+        //分页暂时不做，返回全部数据
+        commentHandler.fetchAllComment(pid, 1, 10, (result)=> {
+
             res.send(result);
         })
     },
@@ -18,8 +26,8 @@ export default {
                 msg: '请先登录',
             });
         }
-        let comment = req.body.comment;
-        if (!comment) {
+        let comment = req.body;
+        if (!comment.comment_msg) {
             return res.send({
                 status: 1,
                 msg: '评论内容不能为空',
@@ -35,6 +43,7 @@ export default {
 
         commentHandler.addComment(comment, (err, comment)=> {
             if (err) {
+                console.log("err:"+err);
                 return res.send({status: 1, msg: '留言失败'})
             }
             res.send({

@@ -2,16 +2,27 @@ import CommentModel from '../models/comment_model';
 import {pageViaServer} from '../helpers/model_helper';
 
 export default {
-    fetchAllComment(pid,pageNum, pageSize,callback) {
-        pageViaServer(CommentModel,{},{
-            pageNum:pageNum,
-            pageSize:pageSize
-        },callback)
+    fetchAllComment(pid, pageNum, pageSize, callback) {
+
+        // pageViaServer(CommentModel, {p_id: pid}, {
+        //     pageNum: pageNum,
+        //     pageSize: pageSize
+        // }, callback)
+
+        CommentModel.find({p_id: pid}, (err, result)=> {
+            if (err) {
+                return callback({
+                    status: 1,
+                    msg: '获取评论失败',
+                });
+            }
+            callback({status: 0, data: result});
+        });
     },
 
-    addComment(commentJson,callback) {
-       let commentModel=new CommentModel(commentJson);
-        commentModel.save((err,comment)=>callback(err,comment));
+    addComment(commentJson, callback) {
+        let commentModel = new CommentModel(commentJson);
+        commentModel.save((err, comment)=>callback(err, comment));
     }
 
 }
