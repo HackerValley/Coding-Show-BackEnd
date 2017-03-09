@@ -53,6 +53,7 @@ export default  {
     const query = { _id: req.params.id };
     const op = {
       _id: 1,
+      uid: 1, // 项目作者
       project_name: 1, // 项目名称
       description: 1, // 一句话描述
       detail: 1, // 简介
