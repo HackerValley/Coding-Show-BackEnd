@@ -20,7 +20,7 @@ export default {
         // });
 
         CommentModel.find({p_id: pid})
-            .sort({'time':'asc'})
+            .sort({'time':'desc'})
             .exec((err, result)=> {
                 if (err) {
                     return callback({
