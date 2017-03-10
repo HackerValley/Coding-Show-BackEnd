@@ -9,7 +9,8 @@ export default {
                 msg: '项目ID不能为空',
             });
         }
-        let page_num = parseInt(_query.page_num,10);
+        let _query = req.query;
+        let page_num = parseInt(_query.page_num,0);
         let page_size = parseInt(_query.page_size,10);
         commentHandler.fetchAllComment(pid, page_num, page_size, (result)=> {
 
