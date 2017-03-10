@@ -9,7 +9,7 @@ export default {
         //     pageSize: pageSize
         // }, callback)
 
-        CommentModel.find({p_id: pid}, (err, result)=> {
+        CommentModel.find({p_id: pid}, null,{sort: [['_id', -1]]},(err, result)=> {
             if (err) {
                 return callback({
                     status: 1,
