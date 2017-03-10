@@ -9,8 +9,9 @@ export default {
                 msg: '项目ID不能为空',
             });
         }
-        //分页暂时不做，返回全部数据
-        commentHandler.fetchAllComment(pid, 1, 10, (result)=> {
+        let page_num = parseInt(_query.page_num,10);
+        let page_size = parseInt(_query.page_size,10);
+        commentHandler.fetchAllComment(pid, page_num, page_size, (result)=> {
 
             res.send(result);
         })
