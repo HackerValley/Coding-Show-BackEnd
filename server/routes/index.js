@@ -43,21 +43,19 @@ router.get('/api/projects/mine', LOGIN_CHECK_MIDDLE, projectController.getMine);
 // 获取项目详情页
 router.get('/api/projects/:id', projectController.getDetail);
 // 创建项目
-router.post('/api/projects', /*LOGIN_CHECK_MIDDLE,*/ projectController.createProject);
+router.post('/api/projects', LOGIN_CHECK_MIDDLE, projectController.createProject);
 // 修改项目
-router.put('/api/projects/:id', /*LOGIN_CHECK_MIDDLE,*/ projectController.modifyProject);
+router.put('/api/projects/:id', LOGIN_CHECK_MIDDLE, projectController.modifyProject);
 
 //点赞
-router.post('/api/projects/star', /*LOGIN_CHECK_MIDDLE,*/ projectController.doStar);
+router.post('/api/projects/star', LOGIN_CHECK_MIDDLE, projectController.doStar);
 // 参与开发 
 
 
 // 参与开发
 
-router.post('/api/developers', /*LOGIN_CHECK_MIDDLE,*/developerController.joinProject);
+router.post('/api/developers', LOGIN_CHECK_MIDDLE,developerController.joinProject);
 
-//点赞
-router.post('/api/projects/star', /*LOGIN_CHECK_MIDDLE,*/ projectController.doStar);
 
 // 留言获取
 router.get('/api/comment/:id', commentController.fetchByProjectId);
