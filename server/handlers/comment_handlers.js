@@ -7,7 +7,7 @@ export default {
         pageViaServer(CommentModel, {p_id: pid}, {
             pageNum: pageNum,
             pageSize: pageSize,
-            sort:{_id: -1}
+            sort:{_id: 1}
         }, (err, result)=> {
             if (err) {
                 return callback({
