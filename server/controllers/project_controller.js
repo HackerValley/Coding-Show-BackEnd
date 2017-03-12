@@ -60,7 +60,11 @@ export default  {
       imagePath: 1, // 项目图片 字符串数组
       project_link: 1, // 链接
       developer_count: 1, // 开发者人数
-      star_count: 1 // 点赞人数
+      developers: 1,
+      star_count: 1,// 点赞人数
+      star_users: 1,
+      create_time: 1,
+      mod_time: 1
     };
     projectHandlers.getDetail(query, op)
       .then((result) => {
