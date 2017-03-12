@@ -4,6 +4,8 @@
 import request from 'supertest';
 import app from '../app';
 import {expect} from 'chai';
+import UserModel from '../models/user_model';
+
 export let cookie = '';
 /*
  测试之前保证这个用户在数据库中
@@ -25,32 +27,47 @@ export let cookie = '';
  其对应的密码为xxxxxx
  */
 before(function(done) {
-    request(app)
-        .post('/api/user/login')
-        .send({
-            username: 'test-1480130335119',
-            password:'xxxxxx'
-        })
-        .expect(200)
-        .end(function(err,res) {
-            if (err) {
-                return done(err);
-            }
-            expect(res.body).to.have.property('status').and.equal(0);
-            let header = res.header;
-            let setCookieArray = header['set-cookie'];
-
-            for (let i=0,len=setCookieArray.length;i<len;i++) {
-                let value = setCookieArray[i];
-                let result = value.match(/^coding_show=([a-zA-Z0-9%\.\-_]+);\s/);
-                if (result && result.length > 1) {
-                    cookie = result[1];
-                    break;
+    UserModel.findOneAndUpdate({"username" : "test-1480130335119"},{
+        $set:{
+            "username" : "test-1480130335119",
+            "email" : "0.029710949398577213@xxx.com",
+            "passwd" : "Mies4fjvr5ZgxWzyVasNamF4DqbfYn4AsBbur2jmcTU=",
+            "avatar" : "",
+            "sns_type" : 0,
+            "skill" : [],
+            "telephone" : "",
+            "level" : 0,
+            "nickname" : ""
+        }
+    },{upsert:true}).then(function() {
+        request(app)
+            .post('/api/user/login')
+            .send({
+                username: 'test-1480130335119',
+                password:'xxxxxx'
+            })
+            .expect(200)
+            .end(function(err,res) {
+                if (err) {
+                    return done(err);
                 }
-            }
-            if (!cookie) {
-                return done(new Error('查找cookie失败'));
-            }
-            done();
-        });
+                expect(res.body).to.have.property('status').and.equal(0);
+                let header = res.header;
+                let setCookieArray = header['set-cookie'];
+
+                for (let i=0,len=setCookieArray.length;i<len;i++) {
+                    let value = setCookieArray[i];
+                    let result = value.match(/^coding_show=([a-zA-Z0-9%\.\-_]+);\s/);
+                    if (result && result.length > 1) {
+                        cookie = result[1];
+                        break;
+                    }
+                }
+                if (!cookie) {
+                    return done(new Error('查找cookie失败'));
+                }
+                done();
+            });
+    });
+
 });
